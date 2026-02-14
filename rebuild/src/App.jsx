@@ -21,11 +21,11 @@ const projects = [
     link: 'https://github.com/Sandesh30-cloud/mentor-mind'
   },
   {
-    title: 'Matsyavan',
-    summary: 'Offline-first aquaculture monitoring platform with IoT and edge AI.',
+    title: 'Matsyavan - Research & Development',
+    summary: 'Offline-first aquaculture monitoring platform with IoT and edge ML.',
     points: [
       'Developed real-time monitoring with IoT sensors, local storage, and dashboard visualization.',
-      'Implemented stereo vision fish-length estimation using OpenCV with dual cameras.',
+      'Prototyped stereo vision-based fish-length estimation using OpenCV with calibrated dual cameras; transitioned to AprilTag-based measurement to reduce calibration overhead and improve edge inference efficiency.',
       'Integrated RNN-based temporal analysis and prediction pipeline.',
       'Deployed Raspberry Pi Zero 2W + ESP32 for edge processing and Raspberry Pi 4 for aggregation.'
     ],
