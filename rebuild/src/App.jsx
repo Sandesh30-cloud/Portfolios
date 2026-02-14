@@ -173,7 +173,7 @@ const App = () => {
             </p>
             <div className="hero-actions">
               <a
-                href="https://drive.google.com/file/d/1klxYCSrgZBSx8nC7AkXBl4eY_4hBCJFL/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1FH3fMamRC7aWkOwbkMHnvovZNNCmMvjA/view?usp=sharing"
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-primary"
