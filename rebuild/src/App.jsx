@@ -73,7 +73,7 @@ const missionStats = [
 ];
 
 const skills = {
-  Languages: ['Python', 'SQL', 'JavaScript', 'TypeScript', 'C', 'Go (Learning)'],
+  Languages: ['Python', 'SQL', 'JavaScript', 'TypeScript', 'C', 'R', 'Go (Learning)'],
   'ML / Data': [
     'NumPy',
     'Pandas',
@@ -84,7 +84,7 @@ const skills = {
     'Feature Engineering',
     'Model Evaluation'
   ],
-  Tools: ['Git', 'Docker', 'Linux', 'VS Code', 'Cursor', 'Postman', 'Jupyter Notebook', 'Jupyter Lab', 'Streamlit'],
+  Tools: ['Git', 'Docker', 'Linux', 'VS Code', 'Cursor', 'Postman', 'Jupyter Notebook', 'Jupyter Lab', 'Streamlit', 'Power BI'],
   Backend: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB', 'Docker', 'Git'],
   IoT: ['Raspberry Pi', 'ESP32', 'Sensor Integration', 'Edge Processing']
 };
@@ -173,7 +173,7 @@ const App = () => {
             </p>
             <div className="hero-actions">
               <a
-                href="https://drive.google.com/file/d/1FH3fMamRC7aWkOwbkMHnvovZNNCmMvjA/view?usp=sharing"
+                href="https://drive.google.com/file/d/1ugyEXA9YyzVMnekpA3vHjv9vAb6E49jq/view?usp=sharing"
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-primary"
