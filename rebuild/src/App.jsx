@@ -21,7 +21,7 @@ const projects = [
     link: 'https://github.com/Sandesh30-cloud/mentor-mind'
   },
   {
-    title: 'Matsyavan - Research & Development',
+    title: 'Matsyavan - Industry-Sponsored Final Year Project',
     summary: 'Offline-first aquaculture monitoring platform with IoT and edge ML.',
     points: [
       'Developed real-time monitoring with IoT sensors, local storage, and dashboard visualization.',
