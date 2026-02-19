@@ -158,8 +158,7 @@ const App = () => {
             <p className="eyebrow">Full Stack Developer and ML Enthusiast</p>
             <h1>Building intelligent products with web, data, and edge systems.</h1>
             <p>
-              I design and ship practical software, from AI-powered learning workflows to real-time IoT monitoring
-              platforms.
+              I design and ship practical software, from AI-powered learning workflows to scalable, production-ready applications. I have a strong professional interest in Data Science and Machine Learning, with a focus on building data-driven, intelligent systems.
             </p>
             <div className="hero-actions">
               <a
