@@ -61,7 +61,7 @@ const experience = {
 
 const aboutPoints = [
   'Computer Engineering student at the University of Mumbai (CGPA 7.32).',
-  'Focused on product-oriented web apps, ML pipelines, and IoT edge systems.',
+  'Focused on product-oriented web apps, ML, and edge systems.',
   'Enjoys building practical systems from architecture to deployment.'
 ];
 
