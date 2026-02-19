@@ -130,16 +130,6 @@ const profiles = [
         <path d="M14.8 3.4a1 1 0 1 1 1.4 1.4L8.9 12l7.3 7.2a1 1 0 0 1-1.4 1.4L6.8 12l8-8.6ZM11 12a1 1 0 0 1 1-1h6.5a1 1 0 1 1 0 2H12a1 1 0 0 1-1-1Z" />
       </svg>
     )
-  },
-  {
-    label: 'Instagram',
-    url: 'https://www.instagram.com/sandesh._04',
-    handle: '@sandesh._04',
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm11.2 1.5a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
-      </svg>
-    )
   }
 ];
 
@@ -173,7 +163,7 @@ const App = () => {
             </p>
             <div className="hero-actions">
               <a
-                href="https://drive.google.com/file/d/1ugyEXA9YyzVMnekpA3vHjv9vAb6E49jq/view?usp=sharing"
+                href="https://drive.google.com/file/d/1yTa6PPwMg4wu3DrR5cVTCVjPv65fqWT8/view?usp=sharing"
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-primary"
