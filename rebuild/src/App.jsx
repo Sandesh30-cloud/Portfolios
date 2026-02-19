@@ -31,7 +31,18 @@ const projects = [
     ],
     stack: ['Python', 'TypeScript', 'Tailwind CSS', 'OpenCV', 'ML', 'IoT'],
     link: ''
-  }
+  },
+  {
+  title: 'Data Analytics & BI Dashboards',
+  summary: 'Performed end-to-end data analysis and built interactive dashboards to extract actionable insights.',
+  points: [
+    'Conducted exploratory data analysis (EDA) and data cleaning using Python (Pandas, NumPy).',
+    'Designed interactive Power BI dashboards for KPI monitoring and business reporting.',
+    'Transformed raw datasets into structured visual reports to support data-driven decision making.'
+  ],
+  stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'Data Visualization'],
+  link: 'https://github.com/Sandesh30-cloud/Data-Science'
+}
 ];
 
 const getStackPapers = (stack) => {
@@ -74,6 +85,7 @@ const missionStats = [
 
 const skills = {
   Languages: ['Python', 'SQL', 'JavaScript', 'TypeScript', 'C', 'R', 'Go (Learning)'],
+
   'ML / Data': [
     'NumPy',
     'Pandas',
@@ -82,12 +94,45 @@ const skills = {
     'Keras',
     'EDA',
     'Feature Engineering',
-    'Model Evaluation'
+    'Model Evaluation',
+    'Data Visualization'
   ],
-  Tools: ['Git', 'Docker', 'Linux', 'VS Code', 'Cursor', 'Postman', 'Jupyter Notebook', 'Jupyter Lab', 'Streamlit', 'Power BI'],
-  Backend: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB', 'Docker', 'Git'],
-  IoT: ['Raspberry Pi', 'ESP32', 'Sensor Integration', 'Edge Processing']
+
+  'Data & BI': [
+    'Power BI',
+    'Dashboard Development',
+    'Data Cleaning',
+    'Data Transformation',
+    'Reporting & Insights'
+  ],
+
+  Backend: [
+    'Node.js',
+    'Express.js',
+    'REST APIs',
+    'MongoDB'
+  ],
+
+  Tools: [
+    'Git',
+    'Docker',
+    'Linux',
+    'VS Code',
+    'Cursor',
+    'Postman',
+    'Jupyter Notebook',
+    'Jupyter Lab',
+    'Streamlit'
+  ],
+
+  IoT: [
+    'Raspberry Pi',
+    'ESP32',
+    'Sensor Integration',
+    'Edge Processing'
+  ]
 };
+
 
 const certifications = [
   {
@@ -158,8 +203,9 @@ const App = () => {
             <p className="eyebrow">Full Stack Developer and ML Enthusiast</p>
             <h1>Building intelligent products with web, data, and edge systems.</h1>
             <p>
-              I design and ship practical software, from AI-powered learning workflows to scalable, production-ready applications. I have a strong professional interest in Data Science and Machine Learning, with a focus on building data-driven, intelligent systems.
-            </p>
+  I design and ship practical software systems from AI driven applications to data analytics pipelines and interactive dashboards. My work spans machine learning, backend engineering, and business intelligence, with a focus on building data-driven, production ready solutions.
+</p>
+
             <div className="hero-actions">
               <a
                 href="https://drive.google.com/file/d/1yTa6PPwMg4wu3DrR5cVTCVjPv65fqWT8/view?usp=sharing"
