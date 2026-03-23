@@ -134,13 +134,6 @@ const skills = {
     'Jupyter Notebook',
     'Jupyter Lab',
     'Streamlit'
-  ],
-
-  IoT: [
-    'Raspberry Pi',
-    'ESP32',
-    'Sensor Integration',
-    'Edge Processing'
   ]
 };
 
