@@ -212,7 +212,7 @@ const App = () => {
 
             <div className="hero-actions">
               <a
-                href="https://drive.google.com/file/d/1JqFn-hGf9L8y76QLerEx_LBiszJaE8U5/view?usp=sharing"
+                href="https://drive.google.com/file/d/1WdgHD-jzEwCxg0V36_B05LZqkMORRrmU/view?usp=sharing"
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-primary"
