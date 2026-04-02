@@ -1,437 +1,619 @@
+import { useState, useEffect, useRef } from 'react';
 import SplashCursor from './components/SplashCursor.tsx';
-import Folder from './components/Folder.jsx';
 
-const navItems = [
-  { label: './about', href: '#about' },
-  { label: './projects', href: '#projects' },
-  { label: './experience', href: '#experience' },
-  { label: './skills', href: '#skills' },
-  { label: './contact', href: '#contact' }
+// Desktop icon data
+const desktopIcons = [
+  { id: 'about', name: 'About_Me.txt', icon: 'file', x: 20, y: 20 },
+  { id: 'projects', name: 'Projects', icon: 'folder', x: 20, y: 120 },
+  { id: 'skills', name: 'Skills.sh', icon: 'script', x: 20, y: 220 },
+  { id: 'experience', name: 'Experience.log', icon: 'log', x: 20, y: 320 },
+  { id: 'contact', name: 'Contact.cfg', icon: 'config', x: 20, y: 420 },
+  { id: 'terminal', name: 'Terminal', icon: 'terminal', x: 120, y: 20 },
+  { id: 'resume', name: 'Resume.pdf', icon: 'pdf', x: 120, y: 120 },
 ];
 
-const projects = [
-  {
-    title: 'Mentor Mind',
-    summary: 'AI-powered Learning Management System for personalized course creation and delivery.',
-    points: [
-      'Built a scalable full-stack architecture for course delivery and management.',
-      'Integrated Gemini API to generate course content, assessments, and concise summaries dynamically.'
-    ],
-    stack: ['Next.js', 'React', 'Tailwind', 'Inngest', 'Clerk', 'Neon', 'Gemini', 'SaaS LMS'],
-    link: 'https://github.com/Sandesh30-cloud/mentor-mind'
-  },
-  {
-    title: 'StockAnalyzer',
-    summary: 'Full-stack stock comparison and analysis platform for evaluating financial data and generating investment insights.',
-    points: [
-      'Developed a unified platform to compare multiple stocks using real-time pricing, financial statements, and key performance metrics.',
-      'Designed interactive dashboards with charts, comparison tables, and investor holding analysis to simplify data-driven decisions.',
-      'Implemented a rule-based recommendation engine for short-term and long-term investment insights based on financial indicators.'
-    ],
-    stack: ['React (TypeScript)', 'Tailwind CSS', 'Flask', 'Python', 'Chart.js', 'Recharts', 'yfinance', 'REST APIs'],
-    link: 'https://github.com/Sandesh30-cloud/StockAnalyzer'
-  },
-  {
-    title: 'Matsyavan - Industry Sponsored Final Year Project',
-    summary: 'Offline-first aquaculture monitoring platform with IoT and edge ML.',
-    points: [
-      'Developed real-time monitoring with IoT sensors, local storage, and dashboard visualization.',
-      'Prototyped stereo vision-based fish-length estimation using OpenCV with calibrated dual cameras; transitioned to AprilTag-based measurement to reduce calibration overhead and improve edge inference efficiency.',
-      'Integrated RNN-based temporal analysis and prediction pipeline.',
-      'Deployed Raspberry Pi Zero 2W + ESP32 for edge processing and Raspberry Pi 4 for aggregation.'
-    ],
-    stack: ['Python', 'TypeScript', 'Tailwind CSS', 'OpenCV', 'ML', 'IoT'],
-    link: ''
-  },
-  {
-    title: 'Data Analytics & BI Dashboards',
-    summary: 'Performed end-to-end data analysis and built interactive dashboards to extract actionable insights.',
-    points: [
-      'Conducted exploratory data analysis (EDA) and data cleaning using Python (Pandas, NumPy).',
-      'Designed interactive Power BI dashboards for KPI monitoring and business reporting.',
-      'Transformed raw datasets into structured visual reports to support data-driven decision making.'
-    ],
-    stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'Data Visualization'],
-    link: 'https://github.com/Sandesh30-cloud/Data-Science'
-  }
-];
-
-const getStackPapers = (stack) => {
-  const bucketSize = Math.ceil(stack.length / 3);
-  const papers = [];
-  for (let i = 0; i < 3; i += 1) {
-    const slice = stack.slice(i * bucketSize, (i + 1) * bucketSize);
-    papers.push(
-      <div className="folder-paper-content" key={`stack-paper-${i}`}>
-        <span>{slice.join(' | ') || 'Tech Stack'}</span>
+// Window content components
+const AboutContent = () => (
+  <div className="window-content-inner">
+    <pre className="ascii-header">{`
+┌─────────────────────────────────────────────────────────────┐
+│  ███████╗ █████╗ ███╗   ██╗██████╗ ███████╗███████╗██╗  ██╗ │
+│  ██╔════╝██╔══██╗████╗  ██║██╔══██╗██╔════╝██╔════╝██║  ██║ │
+│  ███████╗███████║██╔██╗ ██║██║  ██║█████╗  ███████╗███████║ │
+│  ╚════██║██╔══██║██║╚██╗██║██║  ██║██╔══╝  ╚════██║██╔══██║ │
+│  ███████║██║  ██║██║ ╚████║██████╔╝███████╗███████║██║  ██║ │
+│  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝ │
+└─────────────────────────────────────────────────────────────┘
+`}</pre>
+    <div className="info-section">
+      <p className="prompt-line"><span className="prompt">$</span> cat /etc/profile</p>
+      <div className="info-block">
+        <p><span className="label">NAME:</span> Sandesh Yesane</p>
+        <p><span className="label">ROLE:</span> Full Stack Developer &amp; ML Enthusiast</p>
+        <p><span className="label">LOCATION:</span> Mumbai, India</p>
+        <p><span className="label">EDUCATION:</span> B.E. Computer Engineering @ University of Mumbai</p>
+        <p><span className="label">CGPA:</span> 7.32</p>
+        <p><span className="label">GRADUATION:</span> May 2026</p>
+        <p><span className="label">STATUS:</span> <span className="status-available">Available for Hire</span></p>
       </div>
-    );
-  }
-  return papers;
-};
-
-const experience = {
-  role: 'Web Development Intern',
-  org: 'Prodigy Infotech',
-  period: '2024',
-  points: [
-    'Developed and deployed interactive web pages using HTML, CSS, and JavaScript.',
-    'Implemented responsive front-end designs with cross-browser compatibility and performance optimization.',
-    'Integrated APIs for dynamic content rendering and better user experience.'
-  ]
-};
-
-const aboutPoints = [
-  'Computer Engineering student at the University of Mumbai (CGPA 7.32).',
-  'Focused on product-oriented web apps, ML, and edge systems.',
-  'Enjoys building practical systems from architecture to deployment.'
-];
-
-const missionStats = [
-  { label: 'LOCATION', value: 'Mumbai, India' },
-  { label: 'TRACK', value: 'B.E. Computer Engineering' },
-  { label: 'GRADUATION', value: 'May 2026' },
-  { label: 'STATUS', value: 'Available for Hire' }
-];
-
-const skills = {
-  Languages: ['Python', 'SQL', 'JavaScript', 'TypeScript', 'C', 'R', 'Go (Learning)'],
-
-  'ML / Data': [
-    'NumPy',
-    'Pandas',
-    'Scikit-learn',
-    'TensorFlow',
-    'Keras',
-    'EDA',
-    'Feature Engineering',
-    'Model Evaluation',
-    'Data Visualization'
-  ],
-
-  'Data & BI': [
-    'Power BI',
-    'Dashboard Development',
-    'Data Cleaning',
-    'Data Transformation',
-    'Reporting & Insights'
-  ],
-
-  Backend: [
-    'Node.js',
-    'Express.js',
-    'REST APIs',
-    'MongoDB'
-  ],
-
-  Tools: [
-    'Git',
-    'Docker',
-    'Linux',
-    'VS Code',
-    'Cursor',
-    'Postman',
-    'Jupyter Notebook',
-    'Jupyter Lab',
-    'Streamlit'
-  ]
-};
-
-const certifications = [
-  {
-    title: 'IBM Data Fundamentals Certification',
-    url: 'https://www.credly.com/badges/f7e75bd6-6637-47cd-aa5e-5e5d69e95a7f/public_url'
-  },
-  {
-    title: 'Udemy: Data Science, Machine Learning & NLP Certification',
-    url: 'https://drive.google.com/file/d/1gtZpcRn3dU-GtpBEXPmBgyDhLbpURIQx/view?usp=sharing'
-  }
-];
-
-const profiles = [
-  {
-    label: 'GitHub',
-    url: 'https://github.com/Sandesh30-cloud',
-    handle: '@Sandesh30-cloud',
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.4.7-4.1-1.5-4.1-1.5-.5-1.3-1.3-1.6-1.3-1.6-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6A4.7 4.7 0 0 1 6.5 8a4.3 4.3 0 0 1 .1-3.2s1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2a4.3 4.3 0 0 1 .1 3.2 4.7 4.7 0 0 1 1.2 3.3c0 4.7-2.9 5.7-5.6 6 .4.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z" />
-      </svg>
-    )
-  },
-  {
-    label: 'LinkedIn',
-    url: 'https://linkedin.com/in/sandesh-yesane-644396259/',
-    handle: 'sandesh-yesane',
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5ZM3 9h4v12H3V9Zm7 0h3.8v1.6h.1c.5-1 1.8-2 3.7-2C21 8.6 21 10.9 21 14v7h-4v-6.2c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H10V9Z" />
-      </svg>
-    )
-  },
-  {
-    label: 'LeetCode',
-    url: 'https://leetcode.com/u/Lazy_Coder04/',
-    handle: 'Lazy_Coder04',
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M14.8 3.4a1 1 0 1 1 1.4 1.4L8.9 12l7.3 7.2a1 1 0 0 1-1.4 1.4L6.8 12l8-8.6ZM11 12a1 1 0 0 1 1-1h6.5a1 1 0 1 1 0 2H12a1 1 0 0 1-1-1Z" />
-      </svg>
-    )
-  }
-];
-
-const TerminalHeader = ({ title }) => (
-  <div className="terminal-header">
-    <span className="terminal-dot red"></span>
-    <span className="terminal-dot yellow"></span>
-    <span className="terminal-dot green"></span>
-    <span className="terminal-title">{title}</span>
+    </div>
+    <div className="info-section">
+      <p className="prompt-line"><span className="prompt">$</span> cat /var/log/mission.log</p>
+      <ul className="mission-list">
+        <li>Computer Engineering student at the University of Mumbai.</li>
+        <li>Focused on product-oriented web apps, ML, and edge systems.</li>
+        <li>Enjoys building practical systems from architecture to deployment.</li>
+        <li>Building intelligent products with web, data, and edge systems.</li>
+      </ul>
+    </div>
   </div>
 );
 
-const App = () => {
+const ProjectsContent = () => {
+  const projects = [
+    {
+      name: 'mentor-mind/',
+      type: 'dir',
+      desc: 'AI-powered Learning Management System',
+      stack: ['Next.js', 'React', 'Tailwind', 'Gemini', 'Clerk', 'Neon'],
+      link: 'https://github.com/Sandesh30-cloud/mentor-mind'
+    },
+    {
+      name: 'stock-analyzer/',
+      type: 'dir',
+      desc: 'Full-stack stock comparison and analysis platform',
+      stack: ['React', 'TypeScript', 'Flask', 'Python', 'Chart.js'],
+      link: 'https://github.com/Sandesh30-cloud/StockAnalyzer'
+    },
+    {
+      name: 'matsyavan/',
+      type: 'dir',
+      desc: 'Offline-first aquaculture monitoring platform with IoT and edge ML',
+      stack: ['Python', 'TypeScript', 'OpenCV', 'ML', 'IoT', 'Raspberry Pi'],
+      link: ''
+    },
+    {
+      name: 'data-analytics/',
+      type: 'dir',
+      desc: 'Data Analytics & BI Dashboards',
+      stack: ['Python', 'Pandas', 'SQL', 'Power BI'],
+      link: 'https://github.com/Sandesh30-cloud/Data-Science'
+    }
+  ];
+
   return (
-    <div className="app-shell">
+    <div className="window-content-inner terminal-style">
+      <p className="prompt-line"><span className="prompt">sandesh@kali</span>:<span className="path">~/projects</span>$ ls -la</p>
+      <div className="ls-output">
+        <p className="ls-header">total {projects.length}</p>
+        {projects.map((proj, i) => (
+          <div key={i} className="project-entry">
+            <div className="project-row">
+              <span className="perms">drwxr-xr-x</span>
+              <span className="user">sandesh</span>
+              <span className="date">Apr 2026</span>
+              <span className="dir-name">{proj.name}</span>
+            </div>
+            <div className="project-details">
+              <p className="desc"># {proj.desc}</p>
+              <div className="stack-tags">
+                {proj.stack.map((s, j) => <span key={j} className="tag">{s}</span>)}
+              </div>
+              {proj.link && (
+                <a href={proj.link} target="_blank" rel="noreferrer" className="git-link">
+                  $ git clone {proj.link}
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const SkillsContent = () => {
+  const skills = {
+    'Languages': ['Python', 'SQL', 'JavaScript', 'TypeScript', 'C', 'R', 'Go (Learning)'],
+    'ML / Data': ['NumPy', 'Pandas', 'Scikit-learn', 'TensorFlow', 'Keras', 'EDA'],
+    'Data & BI': ['Power BI', 'Dashboard Development', 'Data Cleaning', 'Reporting'],
+    'Backend': ['Node.js', 'Express.js', 'REST APIs', 'MongoDB'],
+    'Tools': ['Git', 'Docker', 'Linux', 'VS Code', 'Postman', 'Jupyter']
+  };
+
+  return (
+    <div className="window-content-inner terminal-style">
+      <p className="prompt-line"><span className="prompt">$</span> apt list --installed | grep skills</p>
+      <div className="skills-output">
+        {Object.entries(skills).map(([category, items]) => (
+          <div key={category} className="skill-category">
+            <p className="category-name">[{category}]</p>
+            <div className="skill-items">
+              {items.map((skill, i) => (
+                <span key={i} className="skill-tag">
+                  <span className="bullet">▸</span> {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const ExperienceContent = () => (
+  <div className="window-content-inner terminal-style">
+    <p className="prompt-line"><span className="prompt">$</span> cat /var/log/experience.log</p>
+    <div className="log-output">
+      <div className="log-entry">
+        <p className="timestamp">[2024-01-01 00:00:00]</p>
+        <p className="log-title">Web Development Intern @ Prodigy Infotech</p>
+        <ul className="log-details">
+          <li>Developed and deployed interactive web pages using HTML, CSS, and JavaScript.</li>
+          <li>Implemented responsive front-end designs with cross-browser compatibility.</li>
+          <li>Integrated APIs for dynamic content rendering and better user experience.</li>
+        </ul>
+      </div>
+      <div className="log-entry">
+        <p className="timestamp">[CERTIFICATIONS]</p>
+        <ul className="log-details">
+          <li>
+            <a href="https://www.credly.com/badges/f7e75bd6-6637-47cd-aa5e-5e5d69e95a7f/public_url" target="_blank" rel="noreferrer">
+              IBM Data Fundamentals Certification
+            </a>
+          </li>
+          <li>
+            <a href="https://drive.google.com/file/d/1gtZpcRn3dU-GtpBEXPmBgyDhLbpURIQx/view" target="_blank" rel="noreferrer">
+              Udemy: Data Science, Machine Learning &amp; NLP
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+);
+
+const ContactContent = () => (
+  <div className="window-content-inner terminal-style">
+    <p className="prompt-line"><span className="prompt">$</span> cat ~/.config/contact.cfg</p>
+    <div className="config-output">
+      <p className="config-section">[network]</p>
+      <p className="config-line">email = <a href="mailto:sandeshyesane996@gmail.com">sandeshyesane996@gmail.com</a></p>
+      <p className="config-line">phone = <a href="tel:+919321451240">+91 9321451240</a></p>
+      
+      <p className="config-section">[social]</p>
+      <p className="config-line">github = <a href="https://github.com/Sandesh30-cloud" target="_blank" rel="noreferrer">github.com/Sandesh30-cloud</a></p>
+      <p className="config-line">linkedin = <a href="https://linkedin.com/in/sandesh-yesane-644396259/" target="_blank" rel="noreferrer">linkedin.com/in/sandesh-yesane</a></p>
+      <p className="config-line">leetcode = <a href="https://leetcode.com/u/Lazy_Coder04/" target="_blank" rel="noreferrer">leetcode.com/Lazy_Coder04</a></p>
+      
+      <p className="config-section">[actions]</p>
+      <div className="action-buttons">
+        <a href="mailto:sandeshyesane996@gmail.com" className="action-btn">$ mail --compose</a>
+        <a href="https://github.com/Sandesh30-cloud" target="_blank" rel="noreferrer" className="action-btn">$ git follow</a>
+      </div>
+    </div>
+  </div>
+);
+
+const TerminalContent = () => {
+  const [lines, setLines] = useState([
+    { type: 'output', text: 'Kali GNU/Linux Rolling \\n \\l' },
+    { type: 'output', text: '' },
+    { type: 'prompt', text: 'sandesh@kali:~$ neofetch' },
+    { type: 'neofetch', text: '' },
+  ]);
+  const [input, setInput] = useState('');
+  const inputRef = useRef(null);
+
+  const neofetch = `
+        .--.                sandesh@kali
+       |o_o |               ─────────────
+       |:_/ |               OS: Kali Linux Rolling
+      //   \\ \\              Host: Portfolio v2.0
+     (|     | )             Kernel: React 18.x
+    /'\\_   _/\`\\            Uptime: ${Math.floor(Math.random() * 100)} days
+    \\___)=(___/             Shell: zsh 5.9
+                            Terminal: xfce4-terminal
+                            CPU: Brain @ 3.0GHz
+                            Memory: Coffee / Unlimited
+`;
+
+  const handleCommand = (cmd) => {
+    const newLines = [...lines, { type: 'prompt', text: `sandesh@kali:~$ ${cmd}` }];
+    
+    const lowerCmd = cmd.toLowerCase().trim();
+    
+    if (lowerCmd === 'help') {
+      newLines.push({ type: 'output', text: 'Available commands: help, whoami, ls, pwd, date, clear, neofetch, skills, contact' });
+    } else if (lowerCmd === 'whoami') {
+      newLines.push({ type: 'output', text: 'sandesh - Full Stack Developer & ML Enthusiast' });
+    } else if (lowerCmd === 'ls') {
+      newLines.push({ type: 'output', text: 'About_Me.txt  Projects/  Skills.sh  Experience.log  Contact.cfg  Resume.pdf' });
+    } else if (lowerCmd === 'pwd') {
+      newLines.push({ type: 'output', text: '/home/sandesh/portfolio' });
+    } else if (lowerCmd === 'date') {
+      newLines.push({ type: 'output', text: new Date().toString() });
+    } else if (lowerCmd === 'clear') {
+      setLines([]);
+      setInput('');
+      return;
+    } else if (lowerCmd === 'neofetch') {
+      newLines.push({ type: 'neofetch', text: '' });
+    } else if (lowerCmd === 'skills') {
+      newLines.push({ type: 'output', text: 'Python | JavaScript | TypeScript | React | Node.js | SQL | Docker | Git | ML | Power BI' });
+    } else if (lowerCmd === 'contact') {
+      newLines.push({ type: 'output', text: 'Email: sandeshyesane996@gmail.com | GitHub: @Sandesh30-cloud' });
+    } else if (cmd.trim() !== '') {
+      newLines.push({ type: 'output', text: `bash: ${cmd}: command not found. Type 'help' for available commands.` });
+    }
+    
+    setLines(newLines);
+    setInput('');
+  };
+
+  return (
+    <div className="terminal-window" onClick={() => inputRef.current?.focus()}>
+      <div className="terminal-output">
+        {lines.map((line, i) => (
+          <div key={i} className={`terminal-line ${line.type}`}>
+            {line.type === 'neofetch' ? (
+              <pre className="neofetch-output">{neofetch}</pre>
+            ) : (
+              line.text
+            )}
+          </div>
+        ))}
+        <div className="terminal-input-line">
+          <span className="terminal-prompt">sandesh@kali:~$</span>
+          <input
+            ref={inputRef}
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleCommand(input)}
+            className="terminal-input"
+            autoFocus
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Desktop Icon Component
+const DesktopIcon = ({ icon, onClick }) => {
+  const iconSvgs = {
+    file: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
+    ),
+    folder: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+      </svg>
+    ),
+    script: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <polyline points="16 18 22 12 16 6"/>
+        <polyline points="8 6 2 12 8 18"/>
+      </svg>
+    ),
+    log: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+    ),
+    config: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    ),
+    terminal: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <polyline points="4 17 10 11 4 5"/>
+        <line x1="12" y1="19" x2="20" y2="19"/>
+      </svg>
+    ),
+    pdf: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <path d="M9 15v-2h2a1 1 0 1 1 0 2H9z"/>
+      </svg>
+    )
+  };
+
+  return (
+    <div className="desktop-icon" onDoubleClick={onClick}>
+      <div className="icon-image">{iconSvgs[icon.icon]}</div>
+      <span className="icon-name">{icon.name}</span>
+    </div>
+  );
+};
+
+// Window Component
+const Window = ({ id, title, children, position, size, isActive, onClose, onFocus, onDragStart, isMinimized }) => {
+  const headerRef = useRef(null);
+
+  if (isMinimized) return null;
+
+  return (
+    <div 
+      className={`window ${isActive ? 'active' : ''}`}
+      style={{ 
+        left: position.x, 
+        top: position.y, 
+        width: size.width, 
+        height: size.height,
+        zIndex: isActive ? 100 : 10
+      }}
+      onClick={onFocus}
+    >
+      <div 
+        ref={headerRef}
+        className="window-header"
+        onMouseDown={(e) => onDragStart(e, id)}
+      >
+        <div className="window-controls">
+          <button className="win-btn close" onClick={(e) => { e.stopPropagation(); onClose(id); }}></button>
+          <button className="win-btn minimize"></button>
+          <button className="win-btn maximize"></button>
+        </div>
+        <span className="window-title">{title}</span>
+      </div>
+      <div className="window-content">
+        {children}
+      </div>
+    </div>
+  );
+};
+
+// Start Menu Component
+const StartMenu = ({ isOpen, onClose, onOpenApp }) => {
+  if (!isOpen) return null;
+
+  const menuItems = [
+    { id: 'terminal', name: 'Terminal', icon: 'terminal' },
+    { id: 'about', name: 'About Me', icon: 'file' },
+    { id: 'projects', name: 'Projects', icon: 'folder' },
+    { id: 'skills', name: 'Skills', icon: 'script' },
+    { id: 'experience', name: 'Experience', icon: 'log' },
+    { id: 'contact', name: 'Contact', icon: 'config' },
+  ];
+
+  return (
+    <div className="start-menu" onClick={(e) => e.stopPropagation()}>
+      <div className="start-menu-header">
+        <div className="kali-logo">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span>Kali Linux</span>
+      </div>
+      <div className="start-menu-items">
+        {menuItems.map(item => (
+          <button 
+            key={item.id} 
+            className="start-menu-item"
+            onClick={() => { onOpenApp(item.id); onClose(); }}
+          >
+            <span className="menu-icon">▸</span>
+            {item.name}
+          </button>
+        ))}
+      </div>
+      <div className="start-menu-footer">
+        <a href="https://drive.google.com/file/d/1WdgHD-jzEwCxg0V36_B05LZqkMORRrmU/view" target="_blank" rel="noreferrer">
+          Download Resume
+        </a>
+      </div>
+    </div>
+  );
+};
+
+// Main App Component
+const App = () => {
+  const [windows, setWindows] = useState([]);
+  const [activeWindow, setActiveWindow] = useState(null);
+  const [startMenuOpen, setStartMenuOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [dragging, setDragging] = useState(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const getWindowContent = (id) => {
+    switch(id) {
+      case 'about': return <AboutContent />;
+      case 'projects': return <ProjectsContent />;
+      case 'skills': return <SkillsContent />;
+      case 'experience': return <ExperienceContent />;
+      case 'contact': return <ContactContent />;
+      case 'terminal': return <TerminalContent />;
+      default: return <div>Content not found</div>;
+    }
+  };
+
+  const getWindowTitle = (id) => {
+    const titles = {
+      about: 'About_Me.txt - Text Editor',
+      projects: 'Projects - File Manager',
+      skills: 'Skills.sh - Terminal',
+      experience: 'Experience.log - Log Viewer',
+      contact: 'Contact.cfg - Config Editor',
+      terminal: 'Terminal - sandesh@kali',
+      resume: 'Resume.pdf - Document Viewer'
+    };
+    return titles[id] || id;
+  };
+
+  const openWindow = (id) => {
+    if (id === 'resume') {
+      window.open('https://drive.google.com/file/d/1WdgHD-jzEwCxg0V36_B05LZqkMORRrmU/view', '_blank');
+      return;
+    }
+
+    const existingWindow = windows.find(w => w.id === id);
+    if (existingWindow) {
+      setActiveWindow(id);
+      setWindows(windows.map(w => w.id === id ? { ...w, isMinimized: false } : w));
+      return;
+    }
+
+    const offset = windows.length * 30;
+    const newWindow = {
+      id,
+      position: { x: 150 + offset, y: 80 + offset },
+      size: { width: 700, height: 500 },
+      isMinimized: false
+    };
+
+    setWindows([...windows, newWindow]);
+    setActiveWindow(id);
+  };
+
+  const closeWindow = (id) => {
+    setWindows(windows.filter(w => w.id !== id));
+    if (activeWindow === id) {
+      setActiveWindow(windows.length > 1 ? windows[windows.length - 2].id : null);
+    }
+  };
+
+  const handleDragStart = (e, id) => {
+    const win = windows.find(w => w.id === id);
+    setDragging(id);
+    setDragOffset({
+      x: e.clientX - win.position.x,
+      y: e.clientY - win.position.y
+    });
+    setActiveWindow(id);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!dragging) return;
+    setWindows(windows.map(w => {
+      if (w.id === dragging) {
+        return {
+          ...w,
+          position: {
+            x: Math.max(0, e.clientX - dragOffset.x),
+            y: Math.max(0, e.clientY - dragOffset.y)
+          }
+        };
+      }
+      return w;
+    }));
+  };
+
+  const handleMouseUp = () => {
+    setDragging(null);
+  };
+
+  return (
+    <div 
+      className="desktop"
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onClick={() => setStartMenuOpen(false)}
+    >
       <SplashCursor 
-        BACK_COLOR={{ r: 0.05, g: 0.4, b: 0.05 }}
-        SPLAT_RADIUS={0.15}
-        SPLAT_FORCE={5000}
+        BACK_COLOR={{ r: 0.02, g: 0.08, b: 0.02 }}
+        SPLAT_RADIUS={0.12}
+        SPLAT_FORCE={4000}
       />
 
-      <div className="container">
-        <header className="topbar card">
-          <div className="brand">sandesh</div>
-          <nav className="topnav">
-            {navItems.map((item) => (
-              <a key={item.label} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          <a className="top-cta" href="mailto:sandeshyesane996@gmail.com">
-            $ contact --init
-          </a>
-        </header>
+      {/* Desktop Icons */}
+      <div className="desktop-icons">
+        {desktopIcons.map(icon => (
+          <DesktopIcon 
+            key={icon.id} 
+            icon={icon} 
+            onClick={() => openWindow(icon.id)}
+          />
+        ))}
+      </div>
 
-        <section className="hero-block" id="about">
-          <article className="hero-main card">
-            <TerminalHeader title="sandesh@kali:~/about" />
-            <div style={{ padding: '1.25rem' }}>
-              <p className="eyebrow">Full Stack Developer & ML Enthusiast</p>
-              <h1>
-                Building <span>intelligent</span> products with web, data, and edge systems.
-              </h1>
-              <p>
-                I design and ship practical software systems from AI driven applications to data analytics pipelines and interactive dashboards. My work spans machine learning, backend engineering, and business intelligence, with a focus on building data-driven, production ready solutions.
-              </p>
+      {/* Windows */}
+      {windows.map(win => (
+        <Window
+          key={win.id}
+          id={win.id}
+          title={getWindowTitle(win.id)}
+          position={win.position}
+          size={win.size}
+          isActive={activeWindow === win.id}
+          isMinimized={win.isMinimized}
+          onClose={closeWindow}
+          onFocus={() => setActiveWindow(win.id)}
+          onDragStart={handleDragStart}
+        >
+          {getWindowContent(win.id)}
+        </Window>
+      ))}
 
-              <div className="hero-actions">
-                <a
-                  href="https://drive.google.com/file/d/1WdgHD-jzEwCxg0V36_B05LZqkMORRrmU/view?usp=sharing"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-primary"
-                >
-                  $ cat resume.pdf
-                </a>
-                <a href="mailto:sandeshyesane996@gmail.com" className="btn">
-                  $ mail --send
-                </a>
-                <a href="tel:+919321451240" className="btn">
-                  $ call --init
-                </a>
-              </div>
-            </div>
-          </article>
+      {/* Start Menu */}
+      <StartMenu 
+        isOpen={startMenuOpen} 
+        onClose={() => setStartMenuOpen(false)}
+        onOpenApp={openWindow}
+      />
 
-          <aside className="mission-panel card">
-            <TerminalHeader title="system_info.sh" />
-            <div style={{ padding: '1.05rem' }}>
-              <h2>System Info</h2>
-              <div className="stat-grid">
-                {missionStats.map((item) => (
-                  <div key={item.label} className="stat-cell">
-                    <p>{item.label}</p>
-                    <h3>{item.value}</h3>
-                  </div>
-                ))}
-              </div>
-              <div className="about-lines">
-                {aboutPoints.map((line, idx) => (
-                  <p key={idx}>{line}</p>
-                ))}
-              </div>
-            </div>
-          </aside>
-        </section>
+      {/* Taskbar */}
+      <div className="taskbar">
+        <button 
+          className={`start-button ${startMenuOpen ? 'active' : ''}`}
+          onClick={(e) => { e.stopPropagation(); setStartMenuOpen(!startMenuOpen); }}
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+            <path d="M12 6l-4 4h3v4h2v-4h3z"/>
+          </svg>
+        </button>
 
-        <section className="card section" id="projects">
-          <TerminalHeader title="ls -la ~/projects" />
-          <div style={{ padding: '1.05rem' }}>
-            <div className="section-head">
-              <h2>Featured Projects</h2>
-              <span>Core systems with measurable impact</span>
-            </div>
-            <div className="project-folder-grid">
-              {projects.map((project) => (
-                <article key={project.title} className="project-folder-card">
-                  <div className="project-folder-visual">
-                    <Folder
-                      color="#5cff5c"
-                      size={1.15}
-                      items={getStackPapers(project.stack)}
-                    />
-                  </div>
-                  <div className="project-folder-body">
-                    <div className="project-top">
-                      <h3>{project.title}</h3>
-                      {project.link ? (
-                        <a href={project.link} target="_blank" rel="noreferrer">
-                          $ git clone
-                        </a>
-                      ) : (
-                        <span>PRIVATE</span>
-                      )}
-                    </div>
-                    <p>{project.summary}</p>
-                    <ul>
-                      {project.points.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                    <div className="chip-row">
-                      {project.stack.map((item) => (
-                        <span key={item} className="chip">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <div className="taskbar-apps">
+          {windows.map(win => (
+            <button 
+              key={win.id}
+              className={`taskbar-app ${activeWindow === win.id ? 'active' : ''}`}
+              onClick={() => {
+                if (win.isMinimized) {
+                  setWindows(windows.map(w => w.id === win.id ? { ...w, isMinimized: false } : w));
+                }
+                setActiveWindow(win.id);
+              }}
+            >
+              {getWindowTitle(win.id).split(' - ')[0]}
+            </button>
+          ))}
+        </div>
 
-        <section className="split-row" id="experience">
-          <article className="card section">
-            <TerminalHeader title="cat experience.log" />
-            <div style={{ padding: '1.05rem' }}>
-              <div className="section-head">
-                <h2>Experience</h2>
-                <span>{experience.period}</span>
-              </div>
-              <h3 style={{ color: 'var(--kali-cyan)', marginBottom: '0.5rem' }}>
-                {experience.role} @ {experience.org}
-              </h3>
-              <ul>
-                {experience.points.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </article>
-
-          <article className="card section">
-            <TerminalHeader title="certifications.json" />
-            <div style={{ padding: '1.05rem' }}>
-              <div className="section-head">
-                <h2>Certifications</h2>
-              </div>
-              <div className="link-list">
-                {certifications.map((item) => (
-                  <a key={item.title} href={item.url} target="_blank" rel="noreferrer" className="link-pill">
-                    {item.title}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </article>
-        </section>
-
-        <section className="card section" id="skills">
-          <TerminalHeader title="apt list --installed" />
-          <div style={{ padding: '1.05rem' }}>
-            <div className="section-head">
-              <h2>Technical Skills</h2>
-              <span>Production stack and tools</span>
-            </div>
-            <div className="skills-grid">
-              {Object.entries(skills).map(([group, items]) => (
-                <div key={group} className="skill-group">
-                  <h3>{group}</h3>
-                  <div className="chip-row">
-                    {items.map((skill) => (
-                      <span key={skill} className="chip">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="card section" id="contact">
-          <TerminalHeader title="whoami --contact" />
-          <div style={{ padding: '1.05rem' }}>
-            <div className="section-head">
-              <h2>Connect</h2>
-              <span>Profiles and direct contact</span>
-            </div>
-            <div className="connect-grid">
-              {profiles.map((item) => (
-                <a key={item.label} href={item.url} target="_blank" rel="noreferrer" className="connect-card">
-                  <span className="connect-icon">{item.icon}</span>
-                  <span className="connect-text">
-                    <strong>{item.label}</strong>
-                    <small>{item.handle}</small>
-                  </span>
-                </a>
-              ))}
-              <a href="mailto:sandeshyesane996@gmail.com" className="connect-card">
-                <span className="connect-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Zm2 .3v.2l7 4.6 7-4.6v-.2a.5.5 0 0 0-.5-.5h-13a.5.5 0 0 0-.5.5Zm14 2.6-6.4 4.2a1 1 0 0 1-1.2 0L5 9.4v8.1c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V9.4Z" />
-                  </svg>
-                </span>
-                <span className="connect-text">
-                  <strong>Email</strong>
-                  <small>sandeshyesane996@gmail.com</small>
-                </span>
-              </a>
-              <a href="tel:+919321451240" className="connect-card">
-                <span className="connect-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6.6 2.5a1 1 0 0 1 1 .7l1.2 4.1a1 1 0 0 1-.3 1l-2 1.6a14.8 14.8 0 0 0 7.6 7.6l1.6-2a1 1 0 0 1 1-.3l4.1 1.2a1 1 0 0 1 .7 1v3a1 1 0 0 1-.9 1 18.2 18.2 0 0 1-8.1-2 19.4 19.4 0 0 1-6-4.8 19.4 19.4 0 0 1-4.8-6 18.2 18.2 0 0 1-2-8.1 1 1 0 0 1 1-.9h3Z" />
-                  </svg>
-                </span>
-                <span className="connect-text">
-                  <strong>Phone</strong>
-                  <small>+91 9321451240</small>
-                </span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <footer style={{ 
-          textAlign: 'center', 
-          padding: '1.5rem', 
-          color: 'var(--ink-dim)',
-          fontSize: '0.8rem',
-          borderTop: '1px solid var(--line)',
-          marginTop: '0.5rem'
-        }}>
-          <p style={{ color: 'var(--kali-green)' }}>
-            root@kali:~# echo &quot;Built with passion and too much caffeine&quot;
-          </p>
-          <p style={{ marginTop: '0.5rem', opacity: 0.6 }}>
-            2024 Sandesh Yesane | All systems operational
-          </p>
-        </footer>
+        <div className="taskbar-tray">
+          <span className="tray-item">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+              <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
+            </svg>
+          </span>
+          <span className="tray-time">
+            {currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+          </span>
+          <span className="tray-date">
+            {currentTime.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+          </span>
+        </div>
       </div>
     </div>
   );
