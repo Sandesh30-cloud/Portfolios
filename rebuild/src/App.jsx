@@ -96,7 +96,8 @@ const projects = [
       'Implemented a rule-based recommendation engine for short-term and long-term investment insights based on financial indicators.'
     ],
     stack: ['React (TypeScript)', 'Tailwind CSS', 'Flask', 'Python', 'Chart.js', 'Recharts', 'yfinance', 'REST APIs'],
-    link: 'https://github.com/Sandesh30-cloud/StockAnalyzer'
+    link: 'https://github.com/Sandesh30-cloud/StockAnalyzer',
+    live: 'https://stock-analyzer-snowy-five.vercel.app/'
   },
   {
     title: 'Matsyavan - Industry Sponsored Final Year Project',
@@ -420,9 +421,16 @@ const renderProjects = (selectedProjectTitle, onSelectProject) => {
             <small>{selectedProject.summary}</small>
           </div>
           {selectedProject.link ? (
-            <a href={selectedProject.link} target="_blank" rel="noreferrer" className="desktop-button compact">
-              Open Repo
-            </a>
+            <div className="project-actions">
+              <a href={selectedProject.link} target="_blank" rel="noreferrer" className="desktop-button compact">
+                Open Repo
+              </a>
+              {selectedProject.live ? (
+                <a href={selectedProject.live} target="_blank" rel="noreferrer" className="desktop-button compact alt">
+                  Live Demo
+                </a>
+              ) : null}
+            </div>
           ) : (
             <span className="muted-state">Private / local</span>
           )}

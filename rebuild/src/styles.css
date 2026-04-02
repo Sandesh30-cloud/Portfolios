@@ -490,6 +490,13 @@ ul {
   gap: 1rem;
 }
 
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: flex-end;
+}
+
 .project-entry-top strong {
   display: block;
   font-size: 1rem;
@@ -551,6 +558,10 @@ ul {
 .desktop-button.compact {
   min-height: 34px;
   padding: 0.45rem 0.75rem;
+}
+
+.desktop-button.alt {
+  background: linear-gradient(180deg, rgba(72, 164, 255, 0.26), rgba(18, 44, 71, 0.92));
 }
 
 .overview-profile {
