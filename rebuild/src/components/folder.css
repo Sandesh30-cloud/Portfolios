@@ -1,18 +1,20 @@
 :root {
-  --folder-color: #70a1ff;
-  --folder-back-color: #4785ff;
-  --paper-1: #e6e6e6;
-  --paper-2: #f2f2f2;
-  --paper-3: #ffffff;
+  --folder-color: #5cff5c;
+  --folder-back-color: #3d9c3d;
+  --paper-1: #1a1a1a;
+  --paper-2: #222222;
+  --paper-3: #2a2a2a;
 }
 
 .folder {
   transition: all 0.2s ease-in;
   cursor: pointer;
+  filter: drop-shadow(0 0 8px rgba(92, 255, 92, 0.3));
 }
 
 .folder:not(.folder--click):hover {
   transform: translateY(-8px);
+  filter: drop-shadow(0 0 15px rgba(92, 255, 92, 0.5));
 }
 
 .folder:not(.folder--click):hover .paper {
@@ -29,6 +31,7 @@
 
 .folder.open {
   transform: translateY(-8px);
+  filter: drop-shadow(0 0 20px rgba(92, 255, 92, 0.6));
 }
 
 .folder.open .paper:nth-child(1) {
@@ -71,6 +74,7 @@
   height: 80px;
   background: var(--folder-back-color);
   border-radius: 0px 10px 10px 10px;
+  box-shadow: inset 0 0 20px rgba(92, 255, 92, 0.1);
 }
 
 .folder__back::after {
@@ -94,9 +98,10 @@
   width: 70%;
   height: 80%;
   background: var(--paper-1);
-  border-radius: 10px;
+  border-radius: 4px;
   transition: all 0.3s ease-in-out;
   overflow: hidden;
+  border: 1px solid rgba(92, 255, 92, 0.2);
 }
 
 .paper:nth-child(2) {
@@ -120,5 +125,12 @@
   border-radius: 5px 10px 10px 10px;
   transform-origin: bottom;
   transition: all 0.3s ease-in-out;
+  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
+/* Terminal-style folder paper content */
+.folder-paper-content {
+  font-family: 'JetBrains Mono', monospace;
+  color: #5cff5c;
+  text-shadow: 0 0 5px rgba(92, 255, 92, 0.5);
+}

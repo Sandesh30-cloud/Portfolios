@@ -2,11 +2,11 @@ import SplashCursor from './components/SplashCursor.tsx';
 import Folder from './components/Folder.jsx';
 
 const navItems = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Contact', href: '#contact' }
+  { label: './about', href: '#about' },
+  { label: './projects', href: '#projects' },
+  { label: './experience', href: '#experience' },
+  { label: './skills', href: '#skills' },
+  { label: './contact', href: '#contact' }
 ];
 
 const projects = [
@@ -21,15 +21,15 @@ const projects = [
     link: 'https://github.com/Sandesh30-cloud/mentor-mind'
   },
   {
-  title: 'StockAnalyzer',
-  summary: 'Full-stack stock comparison and analysis platform for evaluating financial data and generating investment insights.',
-  points: [
-    'Developed a unified platform to compare multiple stocks using real-time pricing, financial statements, and key performance metrics.',
-    'Designed interactive dashboards with charts, comparison tables, and investor holding analysis to simplify data-driven decisions.',
-    'Implemented a rule-based recommendation engine for short-term and long-term investment insights based on financial indicators.'
-  ],
-  stack: ['React (TypeScript)', 'Tailwind CSS', 'Flask', 'Python', 'Chart.js', 'Recharts', 'yfinance', 'REST APIs'],
-  link: 'https://github.com/Sandesh30-cloud/StockAnalyzer'
+    title: 'StockAnalyzer',
+    summary: 'Full-stack stock comparison and analysis platform for evaluating financial data and generating investment insights.',
+    points: [
+      'Developed a unified platform to compare multiple stocks using real-time pricing, financial statements, and key performance metrics.',
+      'Designed interactive dashboards with charts, comparison tables, and investor holding analysis to simplify data-driven decisions.',
+      'Implemented a rule-based recommendation engine for short-term and long-term investment insights based on financial indicators.'
+    ],
+    stack: ['React (TypeScript)', 'Tailwind CSS', 'Flask', 'Python', 'Chart.js', 'Recharts', 'yfinance', 'REST APIs'],
+    link: 'https://github.com/Sandesh30-cloud/StockAnalyzer'
   },
   {
     title: 'Matsyavan - Industry Sponsored Final Year Project',
@@ -44,16 +44,16 @@ const projects = [
     link: ''
   },
   {
-  title: 'Data Analytics & BI Dashboards',
-  summary: 'Performed end-to-end data analysis and built interactive dashboards to extract actionable insights.',
-  points: [
-    'Conducted exploratory data analysis (EDA) and data cleaning using Python (Pandas, NumPy).',
-    'Designed interactive Power BI dashboards for KPI monitoring and business reporting.',
-    'Transformed raw datasets into structured visual reports to support data-driven decision making.'
-  ],
-  stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'Data Visualization'],
-  link: 'https://github.com/Sandesh30-cloud/Data-Science'
-}
+    title: 'Data Analytics & BI Dashboards',
+    summary: 'Performed end-to-end data analysis and built interactive dashboards to extract actionable insights.',
+    points: [
+      'Conducted exploratory data analysis (EDA) and data cleaning using Python (Pandas, NumPy).',
+      'Designed interactive Power BI dashboards for KPI monitoring and business reporting.',
+      'Transformed raw datasets into structured visual reports to support data-driven decision making.'
+    ],
+    stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'Data Visualization'],
+    link: 'https://github.com/Sandesh30-cloud/Data-Science'
+  }
 ];
 
 const getStackPapers = (stack) => {
@@ -63,7 +63,7 @@ const getStackPapers = (stack) => {
     const slice = stack.slice(i * bucketSize, (i + 1) * bucketSize);
     papers.push(
       <div className="folder-paper-content" key={`stack-paper-${i}`}>
-        <span>{slice.join(' • ') || 'Tech Stack'}</span>
+        <span>{slice.join(' | ') || 'Tech Stack'}</span>
       </div>
     );
   }
@@ -88,10 +88,10 @@ const aboutPoints = [
 ];
 
 const missionStats = [
-  { label: 'Base', value: 'Mumbai, India' },
-  { label: 'Track', value: 'B.E. Computer Engineering' },
-  { label: 'Graduation', value: 'May 2026' },
-  { label: 'Current Role', value: 'Available for Opportunities' }
+  { label: 'LOCATION', value: 'Mumbai, India' },
+  { label: 'TRACK', value: 'B.E. Computer Engineering' },
+  { label: 'GRADUATION', value: 'May 2026' },
+  { label: 'STATUS', value: 'Available for Hire' }
 ];
 
 const skills = {
@@ -137,7 +137,6 @@ const skills = {
   ]
 };
 
-
 const certifications = [
   {
     title: 'IBM Data Fundamentals Certification',
@@ -163,7 +162,7 @@ const profiles = [
   {
     label: 'LinkedIn',
     url: 'https://linkedin.com/in/sandesh-yesane-644396259/',
-    handle: 'sandesh-yesane-644396259',
+    handle: 'sandesh-yesane',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5ZM3 9h4v12H3V9Zm7 0h3.8v1.6h.1c.5-1 1.8-2 3.7-2C21 8.6 21 10.9 21 14v7h-4v-6.2c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H10V9Z" />
@@ -182,14 +181,27 @@ const profiles = [
   }
 ];
 
+const TerminalHeader = ({ title }) => (
+  <div className="terminal-header">
+    <span className="terminal-dot red"></span>
+    <span className="terminal-dot yellow"></span>
+    <span className="terminal-dot green"></span>
+    <span className="terminal-title">{title}</span>
+  </div>
+);
+
 const App = () => {
   return (
     <div className="app-shell">
-      <SplashCursor />
+      <SplashCursor 
+        BACK_COLOR={{ r: 0.05, g: 0.4, b: 0.05 }}
+        SPLAT_RADIUS={0.15}
+        SPLAT_FORCE={5000}
+      />
 
       <div className="container">
         <header className="topbar card">
-          <div className="brand">SANDESH YESANE</div>
+          <div className="brand">sandesh</div>
           <nav className="topnav">
             {navItems.map((item) => (
               <a key={item.label} href={item.href}>
@@ -198,189 +210,228 @@ const App = () => {
             ))}
           </nav>
           <a className="top-cta" href="mailto:sandeshyesane996@gmail.com">
-            Reach Out
+            $ contact --init
           </a>
         </header>
 
         <section className="hero-block" id="about">
           <article className="hero-main card">
-            <p className="eyebrow">Full Stack Developer and ML Enthusiast</p>
-            <h1>Building intelligent products with web, data, and edge systems.</h1>
-            <p>
-  I design and ship practical software systems from AI driven applications to data analytics pipelines and interactive dashboards. My work spans machine learning, backend engineering, and business intelligence, with a focus on building data-driven, production ready solutions.
-</p>
+            <TerminalHeader title="sandesh@kali:~/about" />
+            <div style={{ padding: '1.25rem' }}>
+              <p className="eyebrow">Full Stack Developer & ML Enthusiast</p>
+              <h1>
+                Building <span>intelligent</span> products with web, data, and edge systems.
+              </h1>
+              <p>
+                I design and ship practical software systems from AI driven applications to data analytics pipelines and interactive dashboards. My work spans machine learning, backend engineering, and business intelligence, with a focus on building data-driven, production ready solutions.
+              </p>
 
-            <div className="hero-actions">
-              <a
-                href="https://drive.google.com/file/d/1WdgHD-jzEwCxg0V36_B05LZqkMORRrmU/view?usp=sharing"
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-primary"
-              >
-                Download Resume
-              </a>
-              <a href="mailto:sandeshyesane996@gmail.com" className="btn">
-                Email Me
-              </a>
-              <a href="tel:+919321451240" className="btn">
-                +91 9321451240
-              </a>
+              <div className="hero-actions">
+                <a
+                  href="https://drive.google.com/file/d/1WdgHD-jzEwCxg0V36_B05LZqkMORRrmU/view?usp=sharing"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-primary"
+                >
+                  $ cat resume.pdf
+                </a>
+                <a href="mailto:sandeshyesane996@gmail.com" className="btn">
+                  $ mail --send
+                </a>
+                <a href="tel:+919321451240" className="btn">
+                  $ call --init
+                </a>
+              </div>
             </div>
           </article>
 
           <aside className="mission-panel card">
-            <h2>Mission Snapshot</h2>
-            <div className="stat-grid">
-              {missionStats.map((item) => (
-                <div key={item.label} className="stat-cell">
-                  <p>{item.label}</p>
-                  <h3>{item.value}</h3>
-                </div>
-              ))}
-            </div>
-            <div className="about-lines">
-              {aboutPoints.map((line) => (
-                <p key={line}>{line}</p>
-              ))}
+            <TerminalHeader title="system_info.sh" />
+            <div style={{ padding: '1.05rem' }}>
+              <h2>System Info</h2>
+              <div className="stat-grid">
+                {missionStats.map((item) => (
+                  <div key={item.label} className="stat-cell">
+                    <p>{item.label}</p>
+                    <h3>{item.value}</h3>
+                  </div>
+                ))}
+              </div>
+              <div className="about-lines">
+                {aboutPoints.map((line, idx) => (
+                  <p key={idx}>{line}</p>
+                ))}
+              </div>
             </div>
           </aside>
         </section>
 
         <section className="card section" id="projects">
-          <div className="section-head">
-            <h2>Featured Projects</h2>
-            <span>Core systems with measurable impact</span>
-          </div>
-          <div className="project-folder-grid">
-            {projects.map((project) => (
-              <article key={project.title} className="project-folder-card">
-                <div className="project-folder-visual">
-                  <Folder
-                    color="#7b9dff"
-                    size={1.15}
-                    items={getStackPapers(project.stack)}
-                  />
-                </div>
-                <div className="project-folder-body">
-                  <div className="project-top">
-                    <h3>{project.title}</h3>
-                    {project.link ? (
-                      <a href={project.link} target="_blank" rel="noreferrer">
-                        Source
-                      </a>
-                    ) : (
-                      <span>Private</span>
-                    )}
+          <TerminalHeader title="ls -la ~/projects" />
+          <div style={{ padding: '1.05rem' }}>
+            <div className="section-head">
+              <h2>Featured Projects</h2>
+              <span>Core systems with measurable impact</span>
+            </div>
+            <div className="project-folder-grid">
+              {projects.map((project) => (
+                <article key={project.title} className="project-folder-card">
+                  <div className="project-folder-visual">
+                    <Folder
+                      color="#5cff5c"
+                      size={1.15}
+                      items={getStackPapers(project.stack)}
+                    />
                   </div>
-                  <p>{project.summary}</p>
-                  <ul>
-                    {project.points.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
-                  <div className="chip-row">
-                    {project.stack.map((item) => (
-                      <span key={item} className="chip">
-                        {item}
-                      </span>
-                    ))}
+                  <div className="project-folder-body">
+                    <div className="project-top">
+                      <h3>{project.title}</h3>
+                      {project.link ? (
+                        <a href={project.link} target="_blank" rel="noreferrer">
+                          $ git clone
+                        </a>
+                      ) : (
+                        <span>PRIVATE</span>
+                      )}
+                    </div>
+                    <p>{project.summary}</p>
+                    <ul>
+                      {project.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                    <div className="chip-row">
+                      {project.stack.map((item) => (
+                        <span key={item} className="chip">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="split-row" id="experience">
           <article className="card section">
-            <div className="section-head">
-              <h2>Experience</h2>
-              <span>{experience.period}</span>
+            <TerminalHeader title="cat experience.log" />
+            <div style={{ padding: '1.05rem' }}>
+              <div className="section-head">
+                <h2>Experience</h2>
+                <span>{experience.period}</span>
+              </div>
+              <h3 style={{ color: 'var(--kali-cyan)', marginBottom: '0.5rem' }}>
+                {experience.role} @ {experience.org}
+              </h3>
+              <ul>
+                {experience.points.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
-            <h3>
-              {experience.role} · {experience.org}
-            </h3>
-            <ul>
-              {experience.points.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
           </article>
 
           <article className="card section">
-            <div className="section-head">
-              <h2>Certifications</h2>
-            </div>
-            <div className="link-list">
-              {certifications.map((item) => (
-                <a key={item.title} href={item.url} target="_blank" rel="noreferrer" className="link-pill">
-                  {item.title}
-                </a>
-              ))}
+            <TerminalHeader title="certifications.json" />
+            <div style={{ padding: '1.05rem' }}>
+              <div className="section-head">
+                <h2>Certifications</h2>
+              </div>
+              <div className="link-list">
+                {certifications.map((item) => (
+                  <a key={item.title} href={item.url} target="_blank" rel="noreferrer" className="link-pill">
+                    {item.title}
+                  </a>
+                ))}
+              </div>
             </div>
           </article>
         </section>
 
         <section className="card section" id="skills">
-          <div className="section-head">
-            <h2>Technical Skills</h2>
-            <span>Production stack and tools</span>
-          </div>
-          <div className="skills-grid">
-            {Object.entries(skills).map(([group, items]) => (
-              <div key={group} className="skill-group">
-                <h3>{group}</h3>
-                <div className="chip-row">
-                  {items.map((skill) => (
-                    <span key={skill} className="chip">
-                      {skill}
-                    </span>
-                  ))}
+          <TerminalHeader title="apt list --installed" />
+          <div style={{ padding: '1.05rem' }}>
+            <div className="section-head">
+              <h2>Technical Skills</h2>
+              <span>Production stack and tools</span>
+            </div>
+            <div className="skills-grid">
+              {Object.entries(skills).map(([group, items]) => (
+                <div key={group} className="skill-group">
+                  <h3>{group}</h3>
+                  <div className="chip-row">
+                    {items.map((skill) => (
+                      <span key={skill} className="chip">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="card section" id="contact">
-          <div className="section-head">
-            <h2>Connect</h2>
-            <span>Profiles and direct contact</span>
-          </div>
-          <div className="connect-grid">
-            {profiles.map((item) => (
-              <a key={item.label} href={item.url} target="_blank" rel="noreferrer" className="connect-card">
-                <span className="connect-icon">{item.icon}</span>
+          <TerminalHeader title="whoami --contact" />
+          <div style={{ padding: '1.05rem' }}>
+            <div className="section-head">
+              <h2>Connect</h2>
+              <span>Profiles and direct contact</span>
+            </div>
+            <div className="connect-grid">
+              {profiles.map((item) => (
+                <a key={item.label} href={item.url} target="_blank" rel="noreferrer" className="connect-card">
+                  <span className="connect-icon">{item.icon}</span>
+                  <span className="connect-text">
+                    <strong>{item.label}</strong>
+                    <small>{item.handle}</small>
+                  </span>
+                </a>
+              ))}
+              <a href="mailto:sandeshyesane996@gmail.com" className="connect-card">
+                <span className="connect-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Zm2 .3v.2l7 4.6 7-4.6v-.2a.5.5 0 0 0-.5-.5h-13a.5.5 0 0 0-.5.5Zm14 2.6-6.4 4.2a1 1 0 0 1-1.2 0L5 9.4v8.1c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V9.4Z" />
+                  </svg>
+                </span>
                 <span className="connect-text">
-                  <strong>{item.label}</strong>
-                  <small>{item.handle}</small>
+                  <strong>Email</strong>
+                  <small>sandeshyesane996@gmail.com</small>
                 </span>
               </a>
-            ))}
-            <a href="mailto:sandeshyesane996@gmail.com" className="connect-card">
-              <span className="connect-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Zm2 .3v.2l7 4.6 7-4.6v-.2a.5.5 0 0 0-.5-.5h-13a.5.5 0 0 0-.5.5Zm14 2.6-6.4 4.2a1 1 0 0 1-1.2 0L5 9.4v8.1c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V9.4Z" />
-                </svg>
-              </span>
-              <span className="connect-text">
-                <strong>Email</strong>
-                <small>sandeshyesane996@gmail.com</small>
-              </span>
-            </a>
-            <a href="tel:+919321451240" className="connect-card">
-              <span className="connect-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6.6 2.5a1 1 0 0 1 1 .7l1.2 4.1a1 1 0 0 1-.3 1l-2 1.6a14.8 14.8 0 0 0 7.6 7.6l1.6-2a1 1 0 0 1 1-.3l4.1 1.2a1 1 0 0 1 .7 1v3a1 1 0 0 1-.9 1 18.2 18.2 0 0 1-8.1-2 19.4 19.4 0 0 1-6-4.8 19.4 19.4 0 0 1-4.8-6 18.2 18.2 0 0 1-2-8.1 1 1 0 0 1 1-.9h3Z" />
-                </svg>
-              </span>
-              <span className="connect-text">
-                <strong>Phone</strong>
-                <small>+91 9321451240</small>
-              </span>
-            </a>
+              <a href="tel:+919321451240" className="connect-card">
+                <span className="connect-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.6 2.5a1 1 0 0 1 1 .7l1.2 4.1a1 1 0 0 1-.3 1l-2 1.6a14.8 14.8 0 0 0 7.6 7.6l1.6-2a1 1 0 0 1 1-.3l4.1 1.2a1 1 0 0 1 .7 1v3a1 1 0 0 1-.9 1 18.2 18.2 0 0 1-8.1-2 19.4 19.4 0 0 1-6-4.8 19.4 19.4 0 0 1-4.8-6 18.2 18.2 0 0 1-2-8.1 1 1 0 0 1 1-.9h3Z" />
+                  </svg>
+                </span>
+                <span className="connect-text">
+                  <strong>Phone</strong>
+                  <small>+91 9321451240</small>
+                </span>
+              </a>
+            </div>
           </div>
         </section>
+
+        <footer style={{ 
+          textAlign: 'center', 
+          padding: '1.5rem', 
+          color: 'var(--ink-dim)',
+          fontSize: '0.8rem',
+          borderTop: '1px solid var(--line)',
+          marginTop: '0.5rem'
+        }}>
+          <p style={{ color: 'var(--kali-green)' }}>
+            root@kali:~# echo &quot;Built with passion and too much caffeine&quot;
+          </p>
+          <p style={{ marginTop: '0.5rem', opacity: 0.6 }}>
+            2024 Sandesh Yesane | All systems operational
+          </p>
+        </footer>
       </div>
     </div>
   );
