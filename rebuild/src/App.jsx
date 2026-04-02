@@ -136,13 +136,13 @@ const experience = {
 };
 
 const aboutPoints = [
-  'Computer Engineering student at the University of Mumbai (CGPA 7.32).',
-  'Focused on product-oriented web apps, ML pipelines, and IoT edge systems.',
-  'Enjoys building practical systems from architecture to deployment.'
+  'Love to develop new things that help in real time and solve practical problems.',
+  'Develop AI, analytics, and ML-driven products including LMS workflows, stock analysis tools, and prediction systems.',
+  'Use emerging technologies to build real-world solutions across web, AI, analytics, and IoT systems.',
 ];
 
 const missionStats = [
-  { label: 'Host', value: 'kali@portfolio' },
+  { label: 'Host', value: 'Sandesh@portfolio' },
   { label: 'Kernel', value: 'Computer Engineering' },
   { label: 'Location', value: 'Mumbai, India' },
   { label: 'Status', value: 'Available for Opportunities' }
@@ -156,11 +156,12 @@ const skills = {
     'Scikit-learn',
     'TensorFlow',
     'Keras',
+    'Prompt Engineering',
     'EDA',
     'Feature Engineering',
     'Model Evaluation'
   ],
-  Tools: ['Git', 'Docker', 'Linux', 'VS Code', 'Cursor', 'Postman', 'Jupyter Notebook', 'Jupyter Lab', 'Streamlit'],
+  Tools: ['Git', 'Docker', 'Linux', 'VS Code', 'Cursor', 'Firebase', 'Postman', 'Jupyter Notebook', 'Jupyter Lab', 'Streamlit'],
   Backend: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB', 'Docker', 'Git'],
   IoT: ['Raspberry Pi', 'ESP32', 'Sensor Integration', 'Edge Processing']
 };
@@ -191,9 +192,9 @@ const terminalLines = [
   '$ whoami',
   'sandesh-yesane',
   '$ cat /etc/role',
-  'Full Stack Developer and ML Enthusiast',
+  'Web Technologies and AIML Engineerings',
   '$ ls projects/',
-  'mentor-mind  matsyavan',
+  'mentor-mind  matsyavan  stock-analyzer',
   '$ grep status /var/profile/state',
   'available_for_opportunities=true',
   '$ cat /usr/share/education.txt',
@@ -299,7 +300,7 @@ const renderOverview = (activeHomeSection, onSelectHomeSection) => (
             <div className="profile-copy">
               <p className="terminal-tag">sandesh@kali:~$ neofetch</p>
               <h1>Sandesh Yesane</h1>
-              <h2>Full Stack Developer and ML Enthusiast</h2>
+              <h2>Web Technologies and AI/ML Engineerings</h2>
               <p>
                 Building practical systems across AI products, SaaS workflows, analytics, and IoT edge platforms with a
                 strong focus on usable engineering.
@@ -812,7 +813,7 @@ const App = () => {
 
       <header className="desktop-topbar">
         <div className="topbar-left">
-          <span className="topbar-brand">Applications</span>
+          <span className="topbar-brand">Sandesh Yesane</span>
           <span className="topbar-workspace">Places</span>
           <span className="topbar-workspace">Terminal</span>
         </div>
