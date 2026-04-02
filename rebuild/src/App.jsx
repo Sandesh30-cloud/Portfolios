@@ -5,7 +5,7 @@ const DesktopGlyph = ({ children }) => (
   </svg>
 );
 
-const APP_ORDER = ['overview', 'projects', 'terminal', 'skills', 'contact'];
+const APP_ORDER = ['overview', 'projects', 'github', 'terminal', 'skills', 'contact'];
 
 const desktopApps = [
   {
@@ -30,6 +30,19 @@ const desktopApps = [
         <path
           fill="currentColor"
           d="M3.5 6.5A2.5 2.5 0 0 1 6 4h4l2 2h6a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 18 18H6a2.5 2.5 0 0 1-2.5-2.5v-9Z"
+        />
+      </DesktopGlyph>
+    )
+  },
+  {
+    id: 'github',
+    label: 'github',
+    title: 'GitHub',
+    icon: (
+      <DesktopGlyph>
+        <path
+          fill="currentColor"
+          d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.4.7-4.1-1.5-4.1-1.5-.5-1.3-1.3-1.6-1.3-1.6-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6A4.7 4.7 0 0 1 6.5 8a4.3 4.3 0 0 1 .1-3.2s1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2a4.3 4.3 0 0 1 .1 3.2 4.7 4.7 0 0 1 1.2 3.3c0 4.7-2.9 5.7-5.6 6 .4.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"
         />
       </DesktopGlyph>
     )
@@ -219,11 +232,62 @@ const quickFiles = [
   }
 ];
 
+const githubRepos = [
+  {
+    name: 'StockAnalyzer',
+    url: 'https://github.com/Sandesh30-cloud/StockAnalyzer',
+    description: 'StockAnalyzer is a stock analysis dashboard built with a FastAPI backend and a Next.js frontend.',
+    language: 'TypeScript'
+  },
+  {
+    name: 'StudyMind',
+    url: 'https://github.com/Sandesh30-cloud/StudyMind',
+    description: 'Personal AI tutor that explains concepts clearly, solves problems step-by-step, and adapts to your level.',
+    language: 'TypeScript'
+  },
+  {
+    name: 'Data_Analysis_Projects',
+    url: 'https://github.com/Sandesh30-cloud/Data_Analysis_Projects',
+    description: 'Collection of data analysis notebooks and dashboards for practical business and analytics use cases.',
+    language: 'Jupyter Notebook'
+  },
+  {
+    name: 'Patient-Condition-Classification',
+    url: 'https://github.com/Sandesh30-cloud/Patient-Condition-Classification',
+    description: 'Classification workflow for predicting patient conditions using ML-based analysis pipelines.',
+    language: 'Python'
+  },
+  {
+    name: 'Automated-fish-length-detection',
+    url: 'https://github.com/Sandesh30-cloud/Automated-fish-length-detection',
+    description: 'Automated fish length detection using AprilTags for edge devices.',
+    language: 'Python'
+  },
+  {
+    name: 'DSA',
+    url: 'https://github.com/Sandesh30-cloud/DSA',
+    description: 'DSA LeetCode solutions and problem-solving practice repository.',
+    language: 'Python'
+  }
+];
+
+const githubProfile = {
+  name: 'Sandesh Yesane',
+  handle: '@Sandesh30-cloud',
+  bio: 'Building real-world products across full-stack development, AI/ML, analytics, and IoT systems.',
+  avatarUrl: 'https://avatars.githubusercontent.com/u/138008452?v=4',
+  profileUrl: 'https://github.com/Sandesh30-cloud',
+  publicRepos: githubRepos.length,
+  featuredProjects: projects.length,
+  liveProjects: projects.filter((project) => project.live).length
+};
+
 const homeSections = ['Profile', 'Documents', 'Education', 'Links'];
 
 const appMeta = {
   overview: { title: 'about-you.desktop', subtitle: '~/Desktop' },
   projects: { title: 'my-projects.desktop', subtitle: '~/Desktop' },
+  github: { title: 'github.desktop', subtitle: '~/Desktop' },
   terminal: { title: 'experience.desktop', subtitle: '~/Desktop' },
   skills: { title: 'skills.desktop', subtitle: '~/Desktop' },
   contact: { title: 'connect.desktop', subtitle: '~/Desktop' }
@@ -252,6 +316,14 @@ const initialWindowState = {
     maximized: false,
     z: 3,
     bounds: { x: 280, y: 112, width: 760, height: 560 },
+    prevBounds: null
+  },
+  github: {
+    isOpen: false,
+    minimized: false,
+    maximized: false,
+    z: 2,
+    bounds: { x: 240, y: 96, width: 860, height: 620 },
     prevBounds: null
   },
   skills: {
@@ -296,7 +368,7 @@ const renderOverview = (activeHomeSection, onSelectHomeSection) => (
       {activeHomeSection === 'Profile' ? (
         <>
           <div className="profile-header">
-            <img src="/profile-photo.jpeg" alt="Sandesh Yesane" className="profile-avatar" />
+          <img src="/SandeshYesane.jpeg" alt="Sandesh Yesane" className="profile-avatar" />
             <div className="profile-copy">
               <p className="terminal-tag">sandesh@kali:~$ neofetch</p>
               <h1>Sandesh Yesane</h1>
@@ -454,6 +526,95 @@ const renderProjects = (selectedProjectTitle, onSelectProject) => {
   );
 };
 
+const renderGithub = (selectedRepoName, onSelectRepo) => {
+  const selectedRepo = githubRepos.find((repo) => repo.name === selectedRepoName) || githubRepos[0];
+  const featuredRepos = githubRepos.slice(0, 6);
+
+  return (
+    <div className="github-app">
+      <section className="github-hero">
+        <div className="github-profile-block">
+          <img src={githubProfile.avatarUrl} alt={githubProfile.name} className="github-avatar" />
+          <div className="github-profile-copy">
+            <p className="github-kicker">GitHub Profile</p>
+            <h2>{githubProfile.name}</h2>
+            <span>{githubProfile.handle}</span>
+            <p>{githubProfile.bio}</p>
+          </div>
+        </div>
+        <div className="github-hero-side">
+          <a href={githubProfile.profileUrl} target="_blank" rel="noreferrer" className="desktop-button alt">
+            Open Full GitHub Profile
+          </a>
+        </div>
+        <div className="github-stats">
+          <div className="github-stat-card">
+            <small>Public Repos</small>
+            <strong>{githubProfile.publicRepos}</strong>
+          </div>
+          <div className="github-stat-card">
+            <small>Featured Projects</small>
+            <strong>{githubProfile.featuredProjects}</strong>
+          </div>
+          <div className="github-stat-card">
+            <small>Live Projects</small>
+            <strong>{githubProfile.liveProjects}</strong>
+          </div>
+        </div>
+      </section>
+
+      <section className="github-repos-panel">
+        <div className="github-panel-head">
+          <div>
+            <p className="github-kicker">Repositories</p>
+            <h3>Top repositories</h3>
+            <span>Selected from your current public repo list for quick access.</span>
+          </div>
+          <a href="https://github.com/Sandesh30-cloud?tab=repositories" target="_blank" rel="noreferrer" className="desktop-button compact">
+            View all repos
+          </a>
+        </div>
+
+        <div className="github-repo-grid">
+          {featuredRepos.map((repo) => (
+            <button
+              type="button"
+              key={repo.name}
+              className={`github-repo-card${selectedRepo.name === repo.name ? ' active' : ''}`}
+              onClick={() => onSelectRepo(repo.name)}
+            >
+              <strong>{repo.name}</strong>
+              <span>{repo.url.replace('https://github.com/', '')}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="project-entry github-selected-repo">
+          <div className="project-entry-top">
+            <div>
+              <strong>{selectedRepo.name}</strong>
+            <small>{selectedRepo.url.replace('https://github.com/', '')}</small>
+          </div>
+            <div className="project-actions">
+              <a href={selectedRepo.url} target="_blank" rel="noreferrer" className="desktop-button compact">
+                Open Repo
+              </a>
+            </div>
+          </div>
+        <div className="plain-list repo-meta">
+          <p>{selectedRepo.description}</p>
+          <p>Primary language: {selectedRepo.language}</p>
+          <p>Owner: Sandesh30-cloud</p>
+          <p>Visibility: Public</p>
+          <p>Branch: main</p>
+            <p>Repository URL: {selectedRepo.url}</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
 const renderExperience = () => (
   <div className="window-section terminal-window">
     {terminalLines.map((line, index) => (
@@ -553,6 +714,7 @@ const renderContact = () => (
 const windowContent = {
   overview: renderOverview,
   projects: renderProjects,
+  github: renderGithub,
   terminal: renderExperience,
   skills: renderSkills,
   contact: renderContact
@@ -562,11 +724,14 @@ const WindowFrame = ({
   appId,
   windowState,
   isActive,
+  isDragging,
   stageBounds,
   activeHomeSection,
   selectedProjectTitle,
+  selectedRepoName,
   onSelectHomeSection,
   onSelectProject,
+  onSelectRepo,
   onFocus,
   onClose,
   onMinimize,
@@ -579,6 +744,8 @@ const WindowFrame = ({
       ? windowContent[appId](activeHomeSection, onSelectHomeSection)
       : appId === 'projects'
         ? windowContent[appId](selectedProjectTitle, onSelectProject)
+        : appId === 'github'
+          ? windowContent[appId](selectedRepoName, onSelectRepo)
         : windowContent[appId]();
   const style = windowState.maximized
     ? { left: 0, top: 0, width: stageBounds.width, height: stageBounds.height, zIndex: windowState.z }
@@ -592,11 +759,15 @@ const WindowFrame = ({
 
   return (
     <section
-      className={`desktop-window${isActive ? ' active' : ''}${windowState.maximized ? ' is-maximized' : ''}`}
+      className={`desktop-window${isActive ? ' active' : ''}${windowState.maximized ? ' is-maximized' : ''}${isDragging ? ' is-dragging' : ''}`}
       style={style}
       onMouseDown={() => onFocus(appId)}
     >
-      <div className="window-bar" onMouseDown={(event) => onDragStart(event, appId)}>
+      <div
+        className="window-bar"
+        onMouseDown={(event) => onDragStart(event, appId)}
+        onDoubleClick={() => onMaximize(appId)}
+      >
         <div className="window-controls">
           <button
             type="button"
@@ -643,6 +814,7 @@ const App = () => {
   const [dragging, setDragging] = useState(null);
   const [activeHomeSection, setActiveHomeSection] = useState('Profile');
   const [selectedProjectTitle, setSelectedProjectTitle] = useState(projects[0].title);
+  const [selectedRepoName, setSelectedRepoName] = useState(githubRepos[0].name);
   const stageRef = useRef(null);
 
   useEffect(() => {
@@ -674,8 +846,10 @@ const App = () => {
 
         const stageWidth = dragging.stageRect.width;
         const stageHeight = dragging.stageRect.height;
-        const nextX = event.clientX - dragging.offsetX;
-        const nextY = event.clientY - dragging.offsetY;
+        const deltaX = event.clientX - dragging.startClientX;
+        const deltaY = event.clientY - dragging.startClientY;
+        const nextX = dragging.startBounds.x + deltaX;
+        const nextY = dragging.startBounds.y + deltaY;
         const clampedX = Math.max(0, Math.min(nextX, stageWidth - target.bounds.width));
         const clampedY = Math.max(0, Math.min(nextY, stageHeight - target.bounds.height));
 
@@ -684,12 +858,16 @@ const App = () => {
       });
     };
 
-    const handleUp = () => setDragging(null);
+    const handleUp = () => {
+      document.body.classList.remove('is-window-dragging');
+      setDragging(null);
+    };
 
     window.addEventListener('mousemove', handleMove);
     window.addEventListener('mouseup', handleUp);
 
     return () => {
+      document.body.classList.remove('is-window-dragging');
       window.removeEventListener('mousemove', handleMove);
       window.removeEventListener('mouseup', handleUp);
     };
@@ -795,12 +973,15 @@ const App = () => {
     const target = windows[appId];
     if (target.maximized || !stageRef.current) return;
 
+    event.preventDefault();
     const stageRect = stageRef.current.getBoundingClientRect();
+    document.body.classList.add('is-window-dragging');
     setDragging({
       appId,
       stageRect,
-      offsetX: event.clientX - stageRect.left - target.bounds.x,
-      offsetY: event.clientY - stageRect.top - target.bounds.y
+      startClientX: event.clientX,
+      startClientY: event.clientY,
+      startBounds: { ...target.bounds }
     });
     focusWindow(appId);
   };
@@ -852,11 +1033,14 @@ const App = () => {
               appId={appId}
               windowState={state}
               isActive={activeApp === appId}
+              isDragging={dragging?.appId === appId}
               stageBounds={stageBounds}
               activeHomeSection={activeHomeSection}
               selectedProjectTitle={selectedProjectTitle}
+              selectedRepoName={selectedRepoName}
               onSelectHomeSection={setActiveHomeSection}
               onSelectProject={setSelectedProjectTitle}
+              onSelectRepo={setSelectedRepoName}
               onFocus={focusWindow}
               onClose={closeApp}
               onMinimize={minimizeApp}
