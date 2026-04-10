@@ -1070,7 +1070,18 @@ const App = () => {
 
   return (
     <div className="desktop-shell">
-      <div className="desktop-wallpaper" />
+      <div className="desktop-wallpaper">
+        <video
+          className="desktop-wallpaper-video"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        >
+          <source src="/kali-wallpaper.mp4" type="video/mp4" />
+        </video>
+      </div>
 
       <header className="desktop-topbar">
         <div className="topbar-left">
