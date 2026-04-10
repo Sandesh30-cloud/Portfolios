@@ -295,7 +295,7 @@ const appMeta = {
 
 const initialWindowState = {
   overview: {
-    isOpen: true,
+    isOpen: false,
     minimized: false,
     maximized: false,
     z: 5,
@@ -820,7 +820,8 @@ const WindowFrame = ({
 const App = () => {
   const [clock, setClock] = useState('');
   const [windows, setWindows] = useState(initialWindowState);
-  const [activeApp, setActiveApp] = useState('overview');
+  const [activeApp, setActiveApp] = useState(null);
+  const [showWelcome, setShowWelcome] = useState(true);
   const [dragging, setDragging] = useState(null);
   const [resizing, setResizing] = useState(null);
   const [activeHomeSection, setActiveHomeSection] = useState('Profile');
@@ -853,6 +854,15 @@ const App = () => {
 
     window.addEventListener('contextmenu', disableContextMenu);
     return () => window.removeEventListener('contextmenu', disableContextMenu);
+  }, []);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setShowWelcome(false);
+      openApp('overview');
+    }, 2600);
+
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -1081,6 +1091,19 @@ const App = () => {
         >
           <source src="/kali-wallpaper.mp4" type="video/mp4" />
         </video>
+      </div>
+
+      <div className={`welcome-overlay${showWelcome ? ' is-visible' : ' is-hidden'}`}>
+        <div className="welcome-card">
+          <p className="welcome-kicker">Portfolio OS</p>
+          <h1>Welcome</h1>
+          <p className="welcome-subtitle">Launching Sandesh Yesane profile environment...</p>
+          <div className="welcome-loader" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
       </div>
 
       <header className="desktop-topbar">
