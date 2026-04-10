@@ -725,6 +725,7 @@ const WindowFrame = ({
   windowState,
   isActive,
   isDragging,
+  isResizing,
   stageBounds,
   activeHomeSection,
   selectedProjectTitle,
@@ -736,7 +737,8 @@ const WindowFrame = ({
   onClose,
   onMinimize,
   onMaximize,
-  onDragStart
+  onDragStart,
+  onResizeStart
 }) => {
   const meta = appMeta[appId];
   const content =
@@ -759,7 +761,7 @@ const WindowFrame = ({
 
   return (
     <section
-      className={`desktop-window${isActive ? ' active' : ''}${windowState.maximized ? ' is-maximized' : ''}${isDragging ? ' is-dragging' : ''}`}
+      className={`desktop-window${isActive ? ' active' : ''}${windowState.maximized ? ' is-maximized' : ''}${isDragging ? ' is-dragging' : ''}${isResizing ? ' is-resizing' : ''}`}
       style={style}
       onMouseDown={() => onFocus(appId)}
     >
@@ -803,6 +805,14 @@ const WindowFrame = ({
         </div>
       </div>
       <div className="window-body">{content}</div>
+      {!windowState.maximized ? (
+        <button
+          type="button"
+          className="window-resizer"
+          onMouseDown={(event) => onResizeStart(event, appId)}
+          aria-label="Resize window"
+        />
+      ) : null}
     </section>
   );
 };
@@ -812,6 +822,7 @@ const App = () => {
   const [windows, setWindows] = useState(initialWindowState);
   const [activeApp, setActiveApp] = useState('overview');
   const [dragging, setDragging] = useState(null);
+  const [resizing, setResizing] = useState(null);
   const [activeHomeSection, setActiveHomeSection] = useState('Profile');
   const [selectedProjectTitle, setSelectedProjectTitle] = useState(projects[0].title);
   const [selectedRepoName, setSelectedRepoName] = useState(githubRepos[0].name);
@@ -872,6 +883,48 @@ const App = () => {
       window.removeEventListener('mouseup', handleUp);
     };
   }, [dragging]);
+
+  useEffect(() => {
+    if (!resizing) return undefined;
+
+    const handleMove = (event) => {
+      setWindows((current) => {
+        const next = { ...current };
+        const target = next[resizing.appId];
+        if (!target || target.maximized) return current;
+
+        const stageWidth = resizing.stageRect.width;
+        const stageHeight = resizing.stageRect.height;
+        const deltaX = event.clientX - resizing.startClientX;
+        const deltaY = event.clientY - resizing.startClientY;
+        const nextWidth = resizing.startBounds.width + deltaX;
+        const nextHeight = resizing.startBounds.height + deltaY;
+        const maxWidth = stageWidth - resizing.startBounds.x;
+        const maxHeight = stageHeight - resizing.startBounds.y;
+
+        target.bounds = {
+          ...target.bounds,
+          width: Math.max(420, Math.min(nextWidth, maxWidth)),
+          height: Math.max(320, Math.min(nextHeight, maxHeight))
+        };
+        return next;
+      });
+    };
+
+    const handleUp = () => {
+      document.body.classList.remove('is-window-resizing');
+      setResizing(null);
+    };
+
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', handleUp);
+
+    return () => {
+      document.body.classList.remove('is-window-resizing');
+      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('mouseup', handleUp);
+    };
+  }, [resizing]);
 
   const getTopZ = (state = windows) => Math.max(...Object.values(state).map((item) => item.z), 1);
 
@@ -986,6 +1039,24 @@ const App = () => {
     focusWindow(appId);
   };
 
+  const handleResizeStart = (event, appId) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const target = windows[appId];
+    if (target.maximized || !stageRef.current) return;
+
+    document.body.classList.add('is-window-resizing');
+    setResizing({
+      appId,
+      stageRect: stageRef.current.getBoundingClientRect(),
+      startClientX: event.clientX,
+      startClientY: event.clientY,
+      startBounds: { ...target.bounds }
+    });
+    focusWindow(appId);
+  };
+
   const stageBounds = stageRef.current?.getBoundingClientRect() ?? { width: 1280, height: 720 };
 
   return (
@@ -1034,6 +1105,7 @@ const App = () => {
               windowState={state}
               isActive={activeApp === appId}
               isDragging={dragging?.appId === appId}
+              isResizing={resizing?.appId === appId}
               stageBounds={stageBounds}
               activeHomeSection={activeHomeSection}
               selectedProjectTitle={selectedProjectTitle}
@@ -1046,6 +1118,7 @@ const App = () => {
               onMinimize={minimizeApp}
               onMaximize={maximizeApp}
               onDragStart={handleDragStart}
+              onResizeStart={handleResizeStart}
             />
           );
         })}
