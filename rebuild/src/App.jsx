@@ -90,16 +90,18 @@ const desktopApps = [
 
 const projects = [
   {
-    title: 'Mentor Mind',
-    summary: 'AI-powered Learning Management System for personalized course creation and delivery.',
-    points: [
-      'Built a scalable full-stack architecture for course delivery and management.',
-      'Integrated Gemini API to generate course content, assessments, and concise summaries dynamically.'
-    ],
-    stack: ['Next.js', 'React', 'Tailwind', 'Inngest', 'Clerk', 'Neon', 'Gemini', 'SaaS LMS'],
-    link: 'https://github.com/Sandesh30-cloud/mentor-mind'
+  title: 'AgenticResearch',
+  summary: 'A multi-agent AI research platform that autonomously searches the web, extracts content, generates structured research reports, and evaluates report quality using specialized AI agents.',
+  points: [
+  'Designed and implemented a multi-agent workflow consisting of Search, Reader, Writer, and Critic agents using LangChain and Google Gemini.',
+  'Integrated Tavily web search and BeautifulSoup-based content extraction to gather and process real-time information from online sources.',
+  'Built an interactive Streamlit dashboard with live agent monitoring, execution tracking, and downloadable research reports.',
+  'Developed an end-to-end research pipeline that automates information retrieval, report generation, and quality assessment.'
+  ],
+  stack: ['Python', 'LangChain', 'Google Gemini', 'Tavily', 'Streamlit', 'BeautifulSoup', 'Requests', 'Prompt Engineering', 'Multi-Agent Systems'],
+  link: 'https://github.com/Sandesh30-cloud/AgenticResearch'
   },
-  {
+
     title: 'StockAnalyzer',
     summary:
       'Full-stack stock comparison and analysis platform for evaluating financial data and generating investment insights.',
@@ -122,18 +124,7 @@ const projects = [
       'Deployed Raspberry Pi Zero 2W + ESP32 for edge processing and Raspberry Pi 4 for aggregation.'
     ],
     stack: ['Python', 'TypeScript', 'Tailwind CSS', 'OpenCV', 'ML', 'IoT'],
-    link: ''
-  },
-  {
-    title: 'Data Analytics & BI Dashboards',
-    summary: 'Performed end-to-end data analysis and built interactive dashboards to extract actionable insights.',
-    points: [
-      'Conducted exploratory data analysis (EDA) and data cleaning using Python (Pandas, NumPy).',
-      'Designed interactive Power BI dashboards for KPI monitoring and business reporting.',
-      'Transformed raw datasets into structured visual reports to support data-driven decision making.'
-    ],
-    stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'Data Visualization'],
-    link: 'https://github.com/Sandesh30-cloud/Data-Science'
+    link: 'Private repository – project developed in collaboration with industry partner; source code and documentation are not publicly available due to company confidentiality policies.'
   }
 ];
 
@@ -149,9 +140,9 @@ const experience = {
 };
 
 const aboutPoints = [
-  'Love to develop new things that help in real time and solve practical problems.',
-  'Develop AI, analytics, and ML-driven products including LMS workflows, stock analysis tools, and prediction systems.',
-  'Use emerging technologies to build real-world solutions across web, AI, analytics, and IoT systems.',
+  'Passionate about building Generative AI and Agentic AI systems that solve real-world problems through automation, reasoning, and intelligent workflows.',
+  'Develop AI-powered applications including RAG pipelines, multi-agent systems, LLM integrations, analytics platforms, and predictive machine learning solutions.',
+  'Leverage emerging technologies across GenAI, Machine Learning, Web Development, Data Analytics, and IoT to create scalable, production-oriented products.'
 ];
 
 const missionStats = [
@@ -162,21 +153,81 @@ const missionStats = [
 ];
 
 const skills = {
-  Languages: ['Python', 'SQL', 'JavaScript', 'TypeScript', 'C', 'Go (Learning)'],
+  Languages: [
+    'Python',
+    'SQL',
+    'JavaScript',
+    'TypeScript',
+  ],
+
+  'GenAI / LLMs': [
+    'LangChain',
+    'LangGraph',
+    'Google Gemini',
+    'RAG (Retrieval-Augmented Generation)',
+    'Agentic AI',
+    'Multi-Agent Systems',
+    'Prompt Engineering',
+    'Tool Calling',
+    'Function Calling',
+    'Vector Databases',
+    'Embeddings',
+    'AI Agents',
+    'LLM Application Development'
+  ],
+
   'ML / Data': [
     'NumPy',
     'Pandas',
     'Scikit-learn',
     'TensorFlow',
     'Keras',
-    'Prompt Engineering',
     'EDA',
     'Feature Engineering',
-    'Model Evaluation'
+    'Model Evaluation',
+    'Data Visualization'
   ],
-  Tools: ['Git', 'Docker', 'Linux', 'VS Code', 'Cursor', 'Firebase', 'Postman', 'Jupyter Notebook', 'Jupyter Lab', 'Streamlit'],
-  Backend: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB', 'Docker', 'Git'],
-  IoT: ['Raspberry Pi', 'ESP32', 'Sensor Integration', 'Edge Processing']
+
+  Backend: [
+    'Node.js',
+    'Express.js',
+    'REST APIs',
+    'MongoDB',
+    'API Integration',
+    'Authentication'
+  ],
+
+  Tools: [
+    'Git',
+    'GitHub',
+    'Docker',
+    'Linux',
+    'VS Code',
+    'Cursor',
+    'Firebase',
+    'Postman',
+    'Jupyter Notebook',
+    'Jupyter Lab',
+    'Streamlit',
+    'Tavily',
+    'BeautifulSoup',
+    'uv',
+    'Virtual Environments'
+  ],
+
+  Databases: [
+    'MongoDB',
+    'ChromaDB',
+    'Vector Databases'
+  ],
+
+  IoT: [
+    'Raspberry Pi',
+    'ESP32',
+    'Sensor Integration',
+    'Edge Processing',
+    'Computer Vision'
+  ]
 };
 
 const certifications = [
@@ -205,9 +256,9 @@ const terminalLines = [
   '$ whoami',
   'sandesh-yesane',
   '$ cat /etc/role',
-  'Web Technologies and AIML Engineerings',
+  'GenAI and ML',
   '$ ls projects/',
-  'mentor-mind  matsyavan  stock-analyzer',
+  'AgenticResearch matsyavan  stock-analyzer',
   '$ grep status /var/profile/state',
   'available_for_opportunities=true',
   '$ cat /usr/share/education.txt',
@@ -234,29 +285,18 @@ const quickFiles = [
 
 const githubRepos = [
   {
-    name: 'StockAnalyzer',
-    url: 'https://github.com/Sandesh30-cloud/StockAnalyzer',
-    description: 'StockAnalyzer is a stock analysis dashboard built with a FastAPI backend and a Next.js frontend.',
-    language: 'TypeScript'
-  },
-  {
-    name: 'StudyMind',
-    url: 'https://github.com/Sandesh30-cloud/StudyMind',
-    description: 'Personal AI tutor that explains concepts clearly, solves problems step-by-step, and adapts to your level.',
-    language: 'TypeScript'
-  },
-  {
-    name: 'Data_Analysis_Projects',
-    url: 'https://github.com/Sandesh30-cloud/Data_Analysis_Projects',
-    description: 'Collection of data analysis notebooks and dashboards for practical business and analytics use cases.',
-    language: 'Jupyter Notebook'
-  },
-  {
-    name: 'Patient-Condition-Classification',
-    url: 'https://github.com/Sandesh30-cloud/Patient-Condition-Classification',
-    description: 'Classification workflow for predicting patient conditions using ML-based analysis pipelines.',
+    name: 'AgenticResearch',
+    url: 'https://github.com/Sandesh30-cloud/AgenticResearch',
+    description: 'A multi-agent research system that orchestrates four specialized AI components — Search, Reader, Writer, and Critic — to produce structured research reports on any topic.',
     language: 'Python'
   },
+  {
+    name: 'StockAnalyzer',
+    url: 'https://github.com/Sandesh30-cloud/StockAnalyzer',
+    description: 'stock comparison and analysis platform for evaluating financial data and generating investment insights.',
+    language: 'Flask', 'Python', 'Chart.js', 'Recharts', 'yfinance', 'REST APIs'
+  },
+   
   {
     name: 'Automated-fish-length-detection',
     url: 'https://github.com/Sandesh30-cloud/Automated-fish-length-detection',
@@ -274,7 +314,7 @@ const githubRepos = [
 const githubProfile = {
   name: 'Sandesh Yesane',
   handle: '@Sandesh30-cloud',
-  bio: 'Building real-world products across full-stack development, AI/ML, analytics, and IoT systems.',
+  bio: 'Building real-world products across full-stack web development, GenAI, AI/ML, analytics, and IoT systems.',
   avatarUrl: 'https://avatars.githubusercontent.com/u/138008452?v=4',
   profileUrl: 'https://github.com/Sandesh30-cloud',
   publicRepos: githubRepos.length,
