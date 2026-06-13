@@ -102,6 +102,7 @@ const projects = [
   link: 'https://github.com/Sandesh30-cloud/AgenticResearch'
   },
 
+  {
     title: 'StockAnalyzer',
     summary:
       'Full-stack stock comparison and analysis platform for evaluating financial data and generating investment insights.',
