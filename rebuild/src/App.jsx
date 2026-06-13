@@ -102,19 +102,27 @@ const projects = [
   link: 'https://github.com/Sandesh30-cloud/AgenticResearch'
   },
 
-  {
-    title: 'StockAnalyzer',
-    summary:
-      'Full-stack stock comparison and analysis platform for evaluating financial data and generating investment insights.',
-    points: [
-      'Developed a unified platform to compare multiple stocks using real-time pricing, financial statements, and key performance metrics.',
-      'Designed interactive dashboards with charts, comparison tables, and investor holding analysis to simplify data-driven decisions.',
-      'Implemented a rule-based recommendation engine for short-term and long-term investment insights based on financial indicators.'
-    ],
-    stack: ['React (TypeScript)', 'Tailwind CSS', 'Flask', 'Python', 'Chart.js', 'Recharts', 'yfinance', 'REST APIs'],
-    link: 'https://github.com/Sandesh30-cloud/StockAnalyzer',
-    live: 'https://stock-analyzer-snowy-five.vercel.app/'
-  },
+ {
+  title: 'StockAnalyzer',
+  summary: 'A stock comparison and financial analysis platform that helps retail investors evaluate company fundamentals, compare key financial metrics, and make data-driven investment decisions.',
+  points: [
+    'Developed a unified platform to compare multiple stocks using real-time pricing, financial statements, and key performance metrics.',
+    'Designed interactive dashboards with charts, comparison tables, and investor holding analysis to simplify data-driven decisions.',
+    'Implemented a rule-based recommendation engine for short-term and long-term investment insights based on financial indicators.'
+  ],
+  stack: [
+    'React (TypeScript)',
+    'Tailwind CSS',
+    'Flask',
+    'Python',
+    'Chart.js',
+    'Recharts',
+    'yfinance',
+    'REST APIs'
+  ],
+  link: 'https://github.com/Sandesh30-cloud/StockAnalyzer',
+  live: 'https://stock-analyzer-snowy-five.vercel.app/'
+},
   {
     title: 'Matsyavan - Industry Sponsored Final Year Project',
     summary: 'Offline-first aquaculture monitoring platform with IoT and edge ML.',
