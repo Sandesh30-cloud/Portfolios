@@ -303,7 +303,7 @@ const githubRepos = [
     name: 'StockAnalyzer',
     url: 'https://github.com/Sandesh30-cloud/StockAnalyzer',
     description: 'stock comparison and analysis platform for evaluating financial data and generating investment insights.',
-    language: 'Flask', 'Python', 'Chart.js', 'Recharts', 'yfinance', 'REST APIs'
+    language: 'Flask, Python, Chart.js, Recharts, yfinance, REST APIs'
   },
    
   {
@@ -421,10 +421,10 @@ const renderOverview = (activeHomeSection, onSelectHomeSection) => (
             <div className="profile-copy">
               <p className="terminal-tag">sandesh@kali:~$ neofetch</p>
               <h1>Sandesh Yesane</h1>
-              <h2>Web Technologies and AI/ML Engineerings</h2>
+              <h2>AI/ML & Generative AI Engineer</h2>
               <p>
-                Building practical systems across AI products, SaaS workflows, analytics, and IoT edge platforms with a
-                strong focus on usable engineering.
+                Building intelligent applications using Generative AI, Agentic AI, machine learning, and modern web
+                technologies, with a focus on solving real-world problems through practical engineering.
               </p>
             </div>
           </div>
