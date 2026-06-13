@@ -189,17 +189,6 @@ ul {
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: saturate(0.82) brightness(0.62);
-}
-
-.desktop-wallpaper::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(4, 8, 14, 0.18), rgba(4, 8, 14, 0.28)),
-    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.03), transparent 38%);
-  pointer-events: none;
 }
 
 .desktop-topbar {
