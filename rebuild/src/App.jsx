@@ -278,7 +278,7 @@ const quickFiles = [
   {
     name: 'resume.pdf',
     type: 'PDF document',
-    href: 'https://drive.google.com/file/d/1VIbBU8tIsMUxYqfogYA259rvXi-ZpgQu/view?usp=sharing'
+    href: 'https://drive.google.com/file/d/1fZifkAqBL2aOXkyEVGLx6foDEQlKh_jh/view?usp=sharing'
   },
   {
     name: 'linkedin.desktop',
