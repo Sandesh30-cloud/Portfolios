@@ -487,7 +487,7 @@ const renderOverview = (activeHomeSection, onSelectHomeSection) => (
             <p>B.E. Computer Engineering</p>
             <p>University of Mumbai</p>
             <p>CGPA: 7.47</p>
-            <p>Expected graduation: May 2026</p>
+            <p>Graduated: May 2026</p>
           </div>
         </div>
       ) : null}
