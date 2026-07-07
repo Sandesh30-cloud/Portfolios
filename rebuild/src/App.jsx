@@ -486,7 +486,7 @@ const renderOverview = (activeHomeSection, onSelectHomeSection) => (
           <div className="plain-list">
             <p>B.E. Computer Engineering</p>
             <p>University of Mumbai</p>
-            <p>CGPA: 7.32</p>
+            <p>CGPA: 7.47</p>
             <p>Expected graduation: May 2026</p>
           </div>
         </div>
