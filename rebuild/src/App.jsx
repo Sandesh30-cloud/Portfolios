@@ -10,8 +10,8 @@ const APP_ORDER = ['overview', 'projects', 'github', 'terminal', 'skills', 'cont
 const desktopApps = [
   {
     id: 'overview',
-    label: 'about you',
-    title: 'About You',
+    label: 'about me',
+    title: 'About me',
     icon: (
       <DesktopGlyph>
         <path
