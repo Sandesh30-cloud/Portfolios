@@ -1,3 +1,4 @@
+
 :root {
   --bg: #07111c;
   --panel: rgba(6, 14, 24, 0.8);
@@ -204,8 +205,8 @@ ul {
   height: 3rem;
   padding: 0 1rem;
   border-bottom: 1px solid rgba(124, 162, 211, 0.18);
-  background: rgba(5, 10, 16, 0.9);
-  backdrop-filter: blur(16px);
+  background: transparent;
+  backdrop-filter: blur(10px);
 }
 
 .topbar-left,
@@ -251,9 +252,11 @@ ul {
   align-items: center;
   gap: 0.75rem;
   padding: 0.8rem 0.45rem;
+
   border: 1px solid rgba(124, 162, 211, 0.18);
   border-radius: 1.15rem;
-  background: rgba(2, 7, 12, 0.84);
+
+  background: transparent;
   backdrop-filter: blur(10px);
 }
 
@@ -269,7 +272,6 @@ ul {
   color: #d9edff;
   cursor: pointer;
   position: relative;
-  transition: background 160ms ease, transform 160ms ease;
 }
 
 .launcher-item::before {
@@ -316,9 +318,10 @@ ul {
   min-height: 320px;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: linear-gradient(180deg, rgba(8, 14, 22, 0.84), rgba(4, 10, 18, 0.96));
+  background: rgba(5, 15, 25, 0.40);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   overflow: hidden;
 }
 
@@ -457,9 +460,14 @@ ul {
 }
 
 .app-sidebar {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.025);
+
+  background: rgba(255, 255, 255, 0.035);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
   padding: 0.8rem;
   display: grid;
   align-content: start;
@@ -1136,15 +1144,25 @@ ul {
     min-height: calc(100vh - 8.7rem);
   }
 
-  .desktop-window {
-    position: relative;
-    left: 0 !important;
-    top: 0 !important;
-    width: calc(100vw - 1.6rem) !important;
-    height: auto !important;
-    min-height: 0;
-    margin: 0 auto 1rem;
-  }
+ .desktop-window {
+  position: absolute;
+  min-width: 420px;
+  min-height: 320px;
+
+  border: 1px solid rgba(120, 190, 255, 0.35);
+  border-radius: 18px;
+
+  /* Transparent glass */
+  background: rgba(5, 15, 25, 0.28);
+
+  /* Glass effect */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+
+  overflow: hidden;
+}
 
   .window-body {
     height: auto;
@@ -1159,4 +1177,15 @@ ul {
   .profile-header {
     grid-template-columns: 1fr;
   }
+}
+.system-tile,
+.info-block,
+.file-list-block,
+.network-card,
+.package-row,
+.project-entry {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }

@@ -1130,17 +1130,11 @@ const App = () => {
   return (
     <div className="desktop-shell">
       <div className="desktop-wallpaper">
-        <video
-          className="desktop-wallpaper-video"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-        >
-          {/* wallpaper */}
-          <source src="/man-with-jellyfish-in-space.1920x1080.mp4" type="video/mp4" /> 
-        </video>
+        <img
+        className="desktop-wallpaper-video"
+        src="/breathtaking-view-lake-mountains-mesmerizing-sky-with-aurora.jpg"
+        alt="Aurora over a lake and mountains"
+    />
       </div>
 
       <div className={`welcome-overlay${showWelcome ? ' is-visible' : ' is-hidden'}`}>
