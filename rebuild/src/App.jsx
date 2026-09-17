@@ -1132,8 +1132,8 @@ const App = () => {
       <div className="desktop-wallpaper">
         <img
         className="desktop-wallpaper-video"
-        src="/breathtaking-view-lake-mountains-mesmerizing-sky-with-aurora.jpg"
-        alt="Aurora over a lake and mountains"
+        src="/wormhole-astronaut-5200x3250-9640.jpg"
+        alt="wormhole"
     />
       </div>
 
