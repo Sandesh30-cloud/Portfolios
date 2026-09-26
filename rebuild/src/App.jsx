@@ -417,7 +417,7 @@ const renderOverview = (activeHomeSection, onSelectHomeSection) => (
       {activeHomeSection === 'Profile' ? (
         <>
           <div className="profile-header">
-          <img src="/SandeshYesane.jpeg" alt="Sandesh Yesane" className="profile-avatar" />
+          <img src="/My-img.png" alt="Sandesh Yesane" className="profile-avatar" />
             <div className="profile-copy">
               <p className="terminal-tag">sandesh@kali:~$ neofetch</p>
               <h1>Sandesh Yesane</h1>
