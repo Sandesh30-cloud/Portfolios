@@ -460,7 +460,7 @@ const renderOverview = (activeHomeSection, onSelectHomeSection) => (
           </div>
           <div className="file-table">
             {quickFiles.map((item) => (
-              <a key={item.name} href={item.href} target="_blank" rel="noreferrer" className="file-row">
+              <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className="file-row">
                 <span className="file-name">{item.name}</span>
                 <span className="file-type">{item.type}</span>
               </a>
@@ -500,7 +500,7 @@ const renderOverview = (activeHomeSection, onSelectHomeSection) => (
           </div>
           <div className="file-table">
             {profiles.map((item) => (
-              <a key={item.label} href={item.url} target="_blank" rel="noreferrer" className="file-row">
+              <a key={item.label} href={item.url} target="_blank" rel="noopener noreferrer" className="file-row">
                 <span className="file-name">{item.label}</span>
                 <span className="file-type">{item.handle}</span>
               </a>
@@ -544,11 +544,11 @@ const renderProjects = (selectedProjectTitle, onSelectProject) => {
           </div>
           {selectedProject.link ? (
             <div className="project-actions">
-              <a href={selectedProject.link} target="_blank" rel="noreferrer" className="desktop-button compact">
+              <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="desktop-button compact">
                 Open Repo
               </a>
               {selectedProject.live ? (
-                <a href={selectedProject.live} target="_blank" rel="noreferrer" className="desktop-button compact alt">
+                <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="desktop-button compact alt">
                   Live Demo
                 </a>
               ) : null}
@@ -592,7 +592,7 @@ const renderGithub = (selectedRepoName, onSelectRepo) => {
           </div>
         </div>
         <div className="github-hero-side">
-          <a href={githubProfile.profileUrl} target="_blank" rel="noreferrer" className="desktop-button alt">
+          <a href={githubProfile.profileUrl} target="_blank" rel="noopener noreferrer" className="desktop-button alt">
             Open Full GitHub Profile
           </a>
         </div>
@@ -619,7 +619,7 @@ const renderGithub = (selectedRepoName, onSelectRepo) => {
             <h3>Top repositories</h3>
             <span>Selected from your current public repo list for quick access.</span>
           </div>
-          <a href="https://github.com/Sandesh30-cloud?tab=repositories" target="_blank" rel="noreferrer" className="desktop-button compact">
+          <a href="https://github.com/Sandesh30-cloud?tab=repositories" target="_blank" rel="noopener noreferrer" className="desktop-button compact">
             View all repos
           </a>
         </div>
@@ -645,7 +645,7 @@ const renderGithub = (selectedRepoName, onSelectRepo) => {
             <small>{selectedRepo.url.replace('https://github.com/', '')}</small>
           </div>
             <div className="project-actions">
-              <a href={selectedRepo.url} target="_blank" rel="noreferrer" className="desktop-button compact">
+              <a href={selectedRepo.url} target="_blank" rel="noopener noreferrer" className="desktop-button compact">
                 Open Repo
               </a>
             </div>
@@ -682,7 +682,7 @@ const renderExperience = () => (
     </ul>
     <div className="cert-grid">
       {certifications.map((item) => (
-        <a key={item.title} href={item.url} target="_blank" rel="noreferrer" className="desktop-button">
+        <a key={item.title} href={item.url} target="_blank" rel="noopener noreferrer" className="desktop-button">
           {item.title}
         </a>
       ))}
@@ -734,7 +734,7 @@ const renderContact = () => (
     </div>
     <div className="connect-grid">
       {profiles.map((item) => (
-        <a key={item.label} href={item.url} target="_blank" rel="noreferrer" className="connect-card">
+        <a key={item.label} href={item.url} target="_blank" rel="noopener noreferrer" className="connect-card">
           <span className="connect-badge">{item.label.slice(0, 2).toUpperCase()}</span>
           <span className="connect-text">
             <strong>{item.label}</strong>
@@ -870,7 +870,6 @@ const App = () => {
   const [clock, setClock] = useState('');
   const [windows, setWindows] = useState(initialWindowState);
   const [activeApp, setActiveApp] = useState(null);
-  const [showWelcome, setShowWelcome] = useState(true);
   const [dragging, setDragging] = useState(null);
   const [resizing, setResizing] = useState(null);
   const [activeHomeSection, setActiveHomeSection] = useState('Profile');
@@ -906,12 +905,9 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
-      setShowWelcome(false);
-      openApp('overview');
-    }, 2600);
-
-    return () => window.clearTimeout(timeoutId);
+    // Open the portfolio immediately; the welcome animation was delaying access
+    // to the actual work for several seconds on every visit.
+    openApp('overview');
   }, []);
 
   useEffect(() => {
@@ -1131,34 +1127,22 @@ const App = () => {
     <div className="desktop-shell">
       <div className="desktop-wallpaper">
         <img
-        className="desktop-wallpaper-video"
-        src="/wormhole-astronaut-5200x3250-9640.jpg"
-        alt="wormhole"
+        className="desktop-wallpaper-image"
+        src="/portfolio-wallpaper.jpg"
+        alt=""
+        aria-hidden="true"
     />
-      </div>
-
-      <div className={`welcome-overlay${showWelcome ? ' is-visible' : ' is-hidden'}`}>
-        <div className="welcome-card">
-          <p className="welcome-kicker">Portfolio OS</p>
-          <h1>Welcome</h1>
-          <p className="welcome-subtitle">Launching Sandesh Yesane profile environment...</p>
-          <div className="welcome-loader" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </div>
-        </div>
       </div>
 
       <header className="desktop-topbar">
         <div className="topbar-left">
           <span className="topbar-brand">Sandesh Yesane</span>
-          <span className="topbar-workspace">Places</span>
-          <span className="topbar-workspace">Terminal</span>
+          <span className="topbar-workspace">Portfolio</span>
+          <span className="topbar-workspace">Mumbai, India</span>
         </div>
-        <div className="topbar-center">sandesh@kali: ~/portfolio-desktop</div>
+        <div className="topbar-center">AI · Machine Learning · Product Engineering</div>
         <div className="topbar-right">
-          <span>eth0 connected</span>
+          <span className="availability-indicator">Available for opportunities</span>
           <span>{clock}</span>
         </div>
       </header>
